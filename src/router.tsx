@@ -22,7 +22,7 @@ import {
     StatusesPage,
     StatusesSuccessPage,
     StatusesCreatePage,
-    ManufacturersCreatePage, SearchDevicesPage
+    ManufacturersCreatePage,
 } from "./pages";
 import {DevicesByStatusPage} from "./pages/devices/DevicesByStatusPage";
 
