@@ -1,0 +1,38 @@
+.outer_div{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    margin:0;
+    /*background-image: url("./images/background_light.jpg");*/
+    /*padding: 0 1000px 0 1000px;*/
+}
+body{
+    background-image: url("./images/background_light.jpg");
+    background-size: cover;
+    background-position: top;
+}
+.er_title{
+    font-family: "Trebuchet MS", sans-serif;
+    color: darkred;
+}
+.pagination_div{
+    display: flex;
+    width: 1260px;
+    height: 70px;
+    font-family: "Trebuchet MS", sans-serif;
+    color: aliceblue;
+    justify-content: center;
+    align-items: center;
+    margin: 10px;
+}
+.pagination{
+    display: flex;
+    height: 50px;
+    width: 1200px;
+    align-items: center;
+    justify-content: center;
+    background-color: aliceblue;
+    border: 5px solid #318da9;
+    border-radius: 30px;
+}
