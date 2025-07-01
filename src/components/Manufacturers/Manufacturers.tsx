@@ -1,6 +1,5 @@
 import React, {ChangeEvent, FC, PropsWithChildren, useEffect} from "react";
 import {Manufacturer} from "./Manufacturer";
-import {deviceActions} from '../../store';
 import {useAppDispatch, useAppSelector} from "../../hooks";
 import '../Styles/RecordsStyle.css';
 import Stack from "@mui/material/Stack";
@@ -20,7 +19,7 @@ const Manufacturers: FC<IProps> = () => {
     const {page} = useParams()
 
     useEffect(() => {
-        dispatch(manufacturersActions.getAllManufacturers({page}))
+        dispatch(manufacturersActions.getManufacturersByPage({page}))
     }, [dispatch, query, page])
 
     const handleChange = (event:ChangeEvent<unknown> , value:number) => {
@@ -36,7 +35,12 @@ const Manufacturers: FC<IProps> = () => {
     return (
         <div>
             <div className={'records'}>
-                {manufacturers.map((manufacturer => <Manufacturer key={manufacturer.id} SetManufacturer={manufacturer}/>))}
+                <div className={'table_labels'}>
+                    <div className={'table_label_item'}>Виробник</div>
+                    <div className={'table_label_item'}>Дата створення</div>
+                </div>
+                {manufacturers.map((manufacturer => <Manufacturer key={manufacturer.id}
+                                                                  SetManufacturer={manufacturer}/>))}
             </div>
             <div className={'pagination_div'}>
                 <Stack spacing={2} className={'pagination'}>

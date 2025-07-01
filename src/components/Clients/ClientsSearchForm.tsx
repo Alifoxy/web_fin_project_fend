@@ -33,11 +33,6 @@ const ClientsForm = () => {
                         <button type="submit" onSubmit={search} className={'button1'} disabled={!phone}>{phone ? 'Знайти' : 'Введіть номер телефону'}</button>
                     </div>
                 </form>
-
-            {/*<form onSubmit={handleSubmit(search)}>*/}
-            {/*    <input type="text" placeholder={'find client by phone number'} value={phone} onChange={handleChange}/>*/}
-            {/*    <button className={'button'} disabled={!phone}>{phone ? 'search' : 'enter phone number'}</button>*/}
-            {/*</form>*/}
         </div>
 
     );

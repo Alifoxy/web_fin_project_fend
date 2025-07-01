@@ -1,13 +1,8 @@
 import {NavLink} from "react-router-dom";
 import '../Styles/Header.css';
 import React from "react";
-// import ThemeSwitcher from "../Theme Switcher/ThemeSwitcher";
-//import {Switcher} from "../Theme Switcher/Switcher";
-// {/*<img src={require('../Style/images/user_icon.png')} alt={'user icon'} width={50}*/}
-// {/*     height={50}/>*/}
 
 const Header = () => {
-
     return (
             <div>
                 <div className={'header'}>

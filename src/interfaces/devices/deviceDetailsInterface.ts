@@ -1,4 +1,5 @@
-import {IClientDetails} from "../clients/clientDetailsInterface";
+import {IClientDetails} from "../clients";
+import {IStatus} from "../statuses";
 
 export interface IDeviceDetails{
     id: string;
@@ -8,8 +9,14 @@ export interface IDeviceDetails{
     equipment: string;
     break_info: string;
     client: IClientDetails;
-    status_name: string;
+    status: IStatus;
     manufacturer_name: string;
     created: string;
     updated: string;
+
+    // status: {
+    //     name: string
+    //     manufacturer_required: boolean
+    //     is_default:boolean
+    // };
 }

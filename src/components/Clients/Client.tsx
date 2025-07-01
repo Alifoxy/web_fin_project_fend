@@ -18,8 +18,8 @@ const Client: FC<IProps> = ({SetClient}) => {
 
     return (
         <div className={'record'}>
-            <div>{surname}</div>
-            <div>{phone}</div>
+            <div className={'table_item'}>{surname}</div>
+            <div className={'table_item'}>{phone}</div>
 
             <button className={'button1'} onClick={toGetRecDet}>
                 Детальніше...

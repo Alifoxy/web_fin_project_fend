@@ -1,4 +1,4 @@
-import {GetRecordsByNumber} from "../components";
+import {GetRecordsByNumber} from "../../components";
 import React from "react";
 
 const RecordsByNumberPage = () => {

@@ -7,7 +7,7 @@ interface IProps extends PropsWithChildren {
 }
 const RecordsCreateForm: FC<IProps> = () => {
 
-    const { newRecord, isLoading, isError, isSuccess, message } = useSelector((state:any) => state.new_record);
+    const { newRecord, isLoading, isError, isSuccess, message} = useSelector((state:any) => state.new_record);
     const [client, setClient]=useState({name:'', surname:'',email:'',phone:''})
     const [device] = useState({model:'',equipment:'', break_info:''})
     const [devices, setDevices]=useState([device])
@@ -42,14 +42,11 @@ const RecordsCreateForm: FC<IProps> = () => {
         setDevices(newDevs);
     };
 
-
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
         console.log(body)
         // @ts-ignore
         dispatch(createRecordActions.createRecord(body));
-
-
     };
 
     useEffect(() => {
@@ -61,19 +58,25 @@ const RecordsCreateForm: FC<IProps> = () => {
         }
 
         const redirectToCliExists = () => {
-
             navigate(`client_exists`)
         }
+
+        const redirectToNoBaseStatus = () => {
+            navigate(`no_base_status`)
+        }
+
+        if (isError && message === 'Request failed with status code 400') {
+            console.log('No base status!')
+            redirectToNoBaseStatus()
+        }
         
-        if (isError) {
-            alert(`Error: ${message}`);
+        if (isError && message === 'Request failed with status code 409') {
+            console.log('Client exists!')
             redirectToCliExists()
             
         }
         if (isSuccess && newRecord) {
-            alert(`${message}`);
             redirectToSuccess()
-          
         }
         
         return () => {
@@ -82,45 +85,9 @@ const RecordsCreateForm: FC<IProps> = () => {
     }, [newRecord, isError, isSuccess, message, dispatch, client, devices, body, navigate]);
 
 
-
-    // SubmitHandler<any>
-
-    // const create: SubmitHandler<any> = (e: React.FormEvent) => {
-    //     e.preventDefault();
-    //     // setBody({client:client, devices:devices})
-    //     // setBody({client, devices})
-    //     // @ts-ignore
-    //     dispatch(createRecordActions.createRecord(body));
-    //     // setClient({name:'', surname:'',email:'',phone:''})
-    //     // setDevices([{model:'',equipment:'', break_info:''}])
-    //     console.log(body)
-    //     console.log(newRecord)
-    //     // console.log(newRecord)
-    //     // if ( typeof newRecord == 'string'){
-    //     //     redirectToCliExists()
-    //     // }else{
-    //     //     redirectToSuccess()
-    //     // }
-    // };
-
-
-
     const handleAddDevice = () => {
         setDevices([...devices, {model:'', equipment:'' , break_info:'' }]); // Додаємо пустий девайс в масив девайсів
     };
-
-    //
-    // const handleDeviceChange = (index:number, event:any) => {
-    //     const { name, value } = event.target.value;
-    //     const newDevs = [...devices];
-    //     newDevs[index] = { ...newDevs[index], [name]: value };
-    //     setDevices(newDevs);
-    // };
-
-    // const handleClientChange = (event:any) => {
-    //     const { name, value } = event.target.value;
-    //     setClient({...client, [name]: value });
-    // }
 
     const handleRemoveDevice = (index:number) => {
         const newDevices = [...devices];
@@ -173,4 +140,3 @@ const RecordsCreateForm: FC<IProps> = () => {
 };
 
 export {RecordsCreateForm};
-

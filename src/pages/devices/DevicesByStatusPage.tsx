@@ -1,8 +1,8 @@
-// @ts-ignore
 import React from "react";
-import {GetDevicesByStatus} from "../../components/Devices/DevicesByStatus";
+import {GetDevicesByStatus} from "../../components";
 
 const DevicesByStatusPage = () => {
+
     return (
         <div className={'record_page'}>
             <GetDevicesByStatus/>

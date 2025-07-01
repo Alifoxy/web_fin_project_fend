@@ -1,8 +1,8 @@
-import {StatusCreateForm, Statuses} from "../../components";
+import {Statuses} from "../../components";
 import React from "react";
-import {Outlet} from "react-router-dom";
 
 const StatusesPage = () => {
+
     return (
         <div>
             <div className={'record_page'}>

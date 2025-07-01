@@ -24,6 +24,8 @@ const urls = {
         base: devices,
         byParams: `${devices}/by_params`,
         changeStatus: (device_id: string): string => `${devices}/${device_id}/changeStatus`,
+        changeManufacturer: (device_id: string): string => `${devices}/${device_id}/changeManufacturer`,
+        closeRecordDevice: (device_id: string): string => `${devices}/${device_id}/closeDevice`,
         byId: (device_id: string): string => `${devices}/${device_id}`,
 
     },
@@ -31,12 +33,17 @@ const urls = {
         base: statuses,
         byName: `${statuses}/byName`,
         byPage: `${statuses}/byPage`,
+        setManufacturer: (status_id: string): string =>`${statuses}/${status_id}/setManufacturerRequired`,
+        setDefault: (status_id: string): string => `${statuses}/${status_id}/setDefaultStatus`,
+        setReturnReady: (status_id: string): string => `${statuses}/${status_id}/setReturnReadyStatus`,
+        setFinal: (status_id: string): string => `${statuses}/${status_id}/setFinalStatus`,
         byId: (status_id: string): string => `${statuses}/${status_id}`,
 
     },
     manufacturers: {
         base: manufacturers,
         byName: `${manufacturers}/byName`,
+        byPage: `${manufacturers}/byPage`,
         byId: (manufacturer_id: string): string => `${manufacturers}/${manufacturer_id}`,
 
     },
@@ -47,8 +54,3 @@ export {
     baseURL,
     urls
 }
-
-// const rec_by_params = '/records/by_params'
-// const createNew ='/records/createNew'
-// const joinOld ='/records/joinOld'
-// const cli_by_params = '/clients/by_params'

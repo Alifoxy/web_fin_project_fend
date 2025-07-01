@@ -1,7 +1,6 @@
 import {createAsyncThunk, createSlice} from "@reduxjs/toolkit";
-
 import {IManufacturer, INewManufacturer} from "../../interfaces";
-import {manufacturerService} from "../../services/manufacturerService";
+import {manufacturerService} from "../../services";
 
 interface IState {
     newManufacturer: INewManufacturer|null,
@@ -9,7 +8,6 @@ interface IState {
     isMaSuccess: boolean,
     isMaLoading: boolean,
     message: unknown|string
-
 }
 
 const initialState: IState = {
@@ -18,8 +16,6 @@ const initialState: IState = {
     isMaSuccess: false,
     isMaLoading: false,
     message:''
-
-
 }
 
 const createManufacturer = createAsyncThunk<INewManufacturer, INewManufacturer>(
@@ -31,7 +27,6 @@ const createManufacturer = createAsyncThunk<INewManufacturer, INewManufacturer>(
         } catch (error:any) {
             const message =  error.message
             return thunkAPI.rejectWithValue(message)
-
         }
     }
 );
@@ -45,7 +40,6 @@ const deleteManufacturer = createAsyncThunk<IManufacturer, {id:string}>(
         } catch (error:any) {
             return thunkAPI.rejectWithValue(error.response.data)
         }
-
     }
 )
 
@@ -75,14 +69,11 @@ const create_deleteManufacturerSlice = createSlice({
             .addCase(createManufacturer.rejected, (state, action) => {
                 state.isMaLoading = false;
                 state.isMaError = true;
-                state.message = 'Manufacturer already exists!'; // The error message from thunkAPI.rejectWithValue
+                state.message = 'Manufacturer already exists!';
             })
             .addCase(deleteManufacturer.fulfilled, (state, action) => {
                 state.message = 'Manufacturer was deleted successfully!'
             })
-
-
-
 })
 
 const {reducer: create_deleteManufacturerReducer, actions} = create_deleteManufacturerSlice
@@ -94,7 +85,6 @@ const create_deleteManufacturerActions = {
     createManufacturer,
     deleteManufacturer,
 }
-
 
 export {
     create_deleteManufacturerReducer,

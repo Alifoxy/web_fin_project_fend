@@ -19,10 +19,6 @@ const ClientDetails: FC<IProps> = ({ClientDetails}) => {
         return <li className={'record_item'} key={record.id}><button onClick={toGetRecDet} className={'button1'}>{record.record_num}</button></li>
     });
 
-    // const toGetRecDet = () => {
-    //     navigate(`${client_record.}/details`)
-    // };
-
     return (
         <div className={'det_div'}>
             <div className={'inner_det_block'}>

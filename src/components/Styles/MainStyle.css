@@ -10,7 +10,7 @@
 body{
     background-image: url("./images/background_light.jpg");
     background-size: cover;
-    background-position: top;
+    background-position: center;
 }
 .er_title{
     font-family: "Trebuchet MS", sans-serif;
@@ -18,7 +18,7 @@ body{
 }
 .pagination_div{
     display: flex;
-    width: 1260px;
+    width: 1360px;
     height: 70px;
     font-family: "Trebuchet MS", sans-serif;
     color: aliceblue;
@@ -35,4 +35,26 @@ body{
     background-color: aliceblue;
     border: 5px solid #318da9;
     border-radius: 30px;
+}
+.check_div{
+    display: flex;
+    width: 300px;
+    justify-content: center;
+    align-items: center;
+    font-family: "Trebuchet MS", sans-serif;
+    font-size: 20px;
+    color: #205b72;
+}
+.check_input{
+    width: 40px;
+    height: 40px;
+}
+.select_input{
+    width: 300px;
+    height: 40px;
+    font-family: "Trebuchet MS", sans-serif;
+    font-size: 20px;
+    color: #205b72;
+    border-radius: 30px;
+    border: none;
 }

@@ -1,13 +1,12 @@
 import React, {useEffect} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {useNavigate} from "react-router-dom";
-import {createNewActions, resetNew} from "../../store/slices/createNewSlice";
-import {joinOldActions, resetJoin} from "../../store/slices/joinOldSlice";
+import {createNewActions, resetNew} from "../../store/slices/createNewRecordSlice";
+import {joinOldActions, resetJoin} from "../../store/slices/joinOldRecordSlice";
 
-// @ts-ignore
 const ClientExists = () => {
-    const {isNewLoading, isNewError, isNewSuccess, new_message } = useSelector((state:any) => state.new_new_record);
-    const {isJoinLoading, isJoinError, isJoinSuccess, join_message } = useSelector((state:any) => state.join_old_record);
+    const {isNewError, isNewSuccess, new_message } = useSelector((state:any) => state.new_new_record);
+    const {isJoinError, isJoinSuccess, join_message } = useSelector((state:any) => state.join_old_record);
     const body = useSelector((state:any) => state.new_record.body);
     const dispatch = useDispatch();
     const navigate = useNavigate();
@@ -25,13 +24,12 @@ const ClientExists = () => {
         if (isNewSuccess) {
             console.log(`${new_message}`);
             redirectToSuccessNew()
-            // Reset the state after successful creation
+            // Redirect to success page
         }
         
         if (isJoinSuccess) {
             console.log(`${join_message}`);
             redirectToSuccessJoin()
-            // Reset the state after successful creation
         }
 
         if (isNewError||isJoinError) {
@@ -43,16 +41,7 @@ const ClientExists = () => {
             dispatch(resetNew());
             dispatch(resetJoin());
         };
-    }, [isNewSuccess, isJoinSuccess, isNewError, isJoinError, new_message, join_message, dispatch]);
-
-
-    // const createNew: SubmitHandler<any> = () => {
-    //     console.log(body)
-    //     // @ts-ignore
-    //     dispatch(createNewActions.createNew(body));
-    //
-    //
-    // };
+    }, [isNewSuccess, isJoinSuccess, isNewError, isJoinError, new_message, join_message, dispatch, navigate]);
 
     const createNew  = () => {
         console.log(body)
@@ -62,20 +51,12 @@ const ClientExists = () => {
 
     };
 
-    // const joinOld: SubmitHandler<any> = () => {
-    //     // @ts-ignore
-    //     dispatch(joinOldActions.joinOld(body));
-    //
-    //
-    // };
-    //
     const joinOld = () => {
         // @ts-ignore
         dispatch(joinOldActions.joinOld(body));
 
 
     };
-
 
     return (
         <div className={'records'}>

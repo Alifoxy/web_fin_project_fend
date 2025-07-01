@@ -1,26 +1,41 @@
 import React, {FC, PropsWithChildren} from "react";
 import {IRecordDetails} from "../../interfaces";
 import '../Styles/RecordsStyle.css';
-// import {Posters} from "../Posters";
-// import {SetDetRating} from "../../hooks";
-// import {DescDiv, DetailsInnerDiv, InfoDiv} from "../Style/DetailsStyledComponents";
+import {useDispatch} from "react-redux";
+import {deviceActions} from "../../store";
+import {useNavigate} from "react-router-dom";
 
 interface IProps extends PropsWithChildren {
     RecordDetails: IRecordDetails
 }
 const RecordDetails: FC<IProps> = ({RecordDetails}) => {
-    const {record_num, client, devices, created} = RecordDetails;
+    const {id, record_num, client, devices, created, is_closed} = RecordDetails;
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
+    console.log(RecordDetails)
+
 
     const record_device = devices.map(function(device ) {
+        const handleCloseRecord = () => {
+            console.log(device.id)
+            // @ts-ignore
+            dispatch(deviceActions.closeDevice({id: device.id}))
+
+        }
 
         return <li className={'device'} key={device.id}>
-            <div>
-                <div>Модель: {device.model}</div>
-                <div>Комплектація: {device.equipment}</div>
-                <div>Тип поломки: {device.break_info}</div>
-            </div>
+            <div>Модель: {device.model}</div>
+            <div>Комплектація: {device.equipment}</div>
+            <div>Тип поломки: {device.break_info}</div>
+            <div>Статус: {device.status.status}</div>
+            <button onClick={handleCloseRecord} className={'button1 '} disabled={!device.status.is_return_ready}>Видано</button>
         </li>
     });
+
+    const handlePrintRecord = () => {
+
+
+    }
 
     return (
         <div>
@@ -42,6 +57,9 @@ const RecordDetails: FC<IProps> = ({RecordDetails}) => {
                         {record_device}
                     </ul>
                 </div>
+                <button onClick={handlePrintRecord} className={'button1 '}
+                        disabled={!is_closed}>Роздрукувати
+                </button>
             </div>
         </div>
 

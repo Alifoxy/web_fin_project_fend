@@ -22,7 +22,10 @@ const GetDeviceDetails: FC<IProps> = () => {
     }, [dispatch, set_device_id])
 
     const back = () => {
-        navigate(-1)
+        navigate(-2)
+        navigate(+1)
+
+
     }
 
     return (

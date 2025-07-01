@@ -1,7 +1,6 @@
 import {createAsyncThunk, createSlice} from "@reduxjs/toolkit";
-
 import {INewStatus, IStatus} from "../../interfaces";
-import {statusService} from "../../services/statusService";
+import {statusService} from "../../services";
 
 interface IState {
     newStatus: INewStatus|null,
@@ -9,7 +8,6 @@ interface IState {
     isStSuccess: boolean,
     isStLoading: boolean,
     message: unknown|string
-
 }
 
 const initialState: IState = {
@@ -18,8 +16,6 @@ const initialState: IState = {
     isStSuccess: false,
     isStLoading: false,
     message:''
-
-
 }
 
 const createStatus = createAsyncThunk<INewStatus, INewStatus>(
@@ -31,7 +27,6 @@ const createStatus = createAsyncThunk<INewStatus, INewStatus>(
         } catch (error:any) {
             const message =  error.message
             return thunkAPI.rejectWithValue(message)
-
         }
     }
 );
@@ -45,7 +40,6 @@ const deleteStatus = createAsyncThunk<IStatus, {id:string}>(
         } catch (error:any) {
             return thunkAPI.rejectWithValue(error.response.data)
         }
-
     }
 )
 
@@ -75,14 +69,11 @@ const create_deleteStatusSlice = createSlice({
             .addCase(createStatus.rejected, (state, action) => {
                 state.isStLoading = false;
                 state.isStError = true;
-                state.message = 'Status already exists!'; // The error message from thunkAPI.rejectWithValue
+                state.message = action.payload;
             })
             .addCase(deleteStatus.fulfilled, (state, action) => {
                 state.message = 'Status was deleted successfully!'
             })
-
-
-
 })
 
 const {reducer: create_deleteStatusReducer, actions} = create_deleteStatusSlice
@@ -94,7 +85,6 @@ const create_deleteStatusActions = {
     createStatus,
     deleteStatus,
 }
-
 
 export {
     create_deleteStatusReducer,

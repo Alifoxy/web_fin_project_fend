@@ -1,46 +1,45 @@
 import {SubmitHandler, useForm} from "react-hook-form";
 import {useNavigate, useSearchParams} from "react-router-dom";
 import {useEffect, useState} from "react";
+import {useAppSelector} from "../../hooks";
 
-
-const ClientsForm = () => {
+const DevicesSearchForm = () => {
     const {handleSubmit,reset} = useForm();
+    const {current_page} = useAppSelector(state => state.devices);
     const [,setQuery] = useSearchParams({query:''})
-    const [phone, setPhone]=useState('')
+    const [searchModel, setSearchModel]=useState('')
     const navigate = useNavigate();
 
     useEffect(() => {
-        setQuery(phone)
-    }, [setQuery, phone])
+        setQuery(searchModel)
+    }, [setQuery, searchModel])
 
     const handleChange = (event:any) => {
-        setPhone(event.target.value)
+        const newModel = (event.target.value)
+        setSearchModel(newModel)
     }
 
-    const search: SubmitHandler<any> = () => {
+    const Search: SubmitHandler<any> = () => {
+        console.log(searchModel)
         reset()
-        navigate(`${phone}`)
+        navigate(`search/model/${searchModel}/${current_page}`)
     };
 
     return (
         <div>
             <div>
-                <h2 className={'title3'}>Знайти клієнта за номером телефону</h2>
+                <h2 className={'title3'}>Знайти пристрої за назвою моделі</h2>
             </div>
-                <form onSubmit={handleSubmit(search)}>
+                <form onSubmit={handleSubmit(Search)}>
                     <div className={'search_div'}>
-                        <input type="text" placeholder={'номер телефону'} className={'search_input'} value={phone} onChange={handleChange}/>
-                        <button type="submit" onSubmit={search} className={'button1'} disabled={!phone}>{phone ? 'Знайти' : 'Введіть номер телефону'}</button>
+                        <input type="text" placeholder={'назва моделі'} className={'search_input'} value={searchModel} onChange={handleChange}/>
+                        <button type="submit" onSubmit={Search} className={'button1'} disabled={!searchModel}>{searchModel ? 'Знайти' : 'Введіть назву моделі'}</button>
                     </div>
                 </form>
 
-            {/*<form onSubmit={handleSubmit(search)}>*/}
-            {/*    <input type="text" placeholder={'find client by phone number'} value={phone} onChange={handleChange}/>*/}
-            {/*    <button className={'button'} disabled={!phone}>{phone ? 'search' : 'enter phone number'}</button>*/}
-            {/*</form>*/}
         </div>
 
     );
 };
 
-export {ClientsForm};
+export {DevicesSearchForm};

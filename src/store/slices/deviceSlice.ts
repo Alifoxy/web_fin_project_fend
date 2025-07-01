@@ -1,8 +1,6 @@
 import {createAsyncThunk, createSlice} from "@reduxjs/toolkit";
-
 import {IDeviceDetails, IDevices} from "../../interfaces";
-import {deviceService} from "../../services/deviceService";
-
+import {deviceService} from "../../services";
 
 interface IState {
     devices: IDeviceDetails[],
@@ -16,9 +14,7 @@ const initialState: IState = {
     deviceById:null,
     total_pages: 50,
     current_page:0,
-
 };
-
 
 const getAllDevices = createAsyncThunk<IDevices, {page:string|undefined}>(
     'deviceSlice/getAll',
@@ -29,25 +25,23 @@ const getAllDevices = createAsyncThunk<IDevices, {page:string|undefined}>(
         } catch (error:any) {
             return thunkAPI.rejectWithValue(error.response.data)
         }
-
     }
 )
 
-// const getByParams = createAsyncThunk<IClients, void>(
-//     'clientSlice/getAll',
-//     async (_,thunkAPI) => {
-//         try {
-//             const {data} = await clientService.getByParams();
-//             return data
-//         } catch (error:any) {
-//             return thunkAPI.rejectWithValue(error.response.data)
-//         }
-//
-//     }
-// )
+const getByModel = createAsyncThunk<IDevices, {page:string|undefined, search:string|undefined}>(
+    'deviceSlice/getByModel',
+    async ({page, search},thunkAPI) => {
+        try {
+            const {data} = await deviceService.getByModel(page,search);
+            return data
+        } catch (error:any) {
+            return thunkAPI.rejectWithValue(error.response.data)
+        }
+    }
+)
 
 const getByStatus = createAsyncThunk<IDevices, {page:string|undefined, status:string|undefined}>(
-    'deviceSlice/getByParams',
+    'deviceSlice/getByStatus',
     async ({page, status},thunkAPI) => {
         try {
             const {data} = await deviceService.getByStatus(page,status);
@@ -55,7 +49,18 @@ const getByStatus = createAsyncThunk<IDevices, {page:string|undefined, status:st
         } catch (error:any) {
             return thunkAPI.rejectWithValue(error.response.data)
         }
+    }
+)
 
+const getByManufacturer = createAsyncThunk<IDevices, {page:string|undefined, manufacturer:string|undefined}>(
+    'deviceSlice/getByManufacturer',
+    async ({page, manufacturer},thunkAPI) => {
+        try {
+            const {data} = await deviceService.getByManufacturer(page,manufacturer);
+            return data
+        } catch (error:any) {
+            return thunkAPI.rejectWithValue(error.response.data)
+        }
     }
 )
 
@@ -68,11 +73,20 @@ const getById = createAsyncThunk<IDeviceDetails, {id:string}>(
         } catch (error:any) {
             return thunkAPI.rejectWithValue(error.response.data)
         }
-
     }
 )
 
-
+const closeDevice = createAsyncThunk<IDeviceDetails, {id:string}>(
+    'deviceSlice/closeDevice',
+    async ({id}, thunkAPI) => {
+        try {
+            const {data} = await deviceService.closeDeviceRecord(id);
+            return data
+        } catch (error:any) {
+            return thunkAPI.rejectWithValue(error.response.data)
+        }
+    }
+)
 
 const deviceSlice = createSlice({
     name: 'deviceSlice',
@@ -85,7 +99,17 @@ const deviceSlice = createSlice({
                 state.current_page = +page;
                 state.devices = data;
             })
+            .addCase(getByModel.fulfilled, (state, action) => {
+                const {page, data} = action.payload;
+                state.current_page = +page;
+                state.devices = data;
+            })
             .addCase(getByStatus.fulfilled, (state, action) => {
+                const {page, data} = action.payload;
+                state.current_page = +page;
+                state.devices = data;
+            })
+            .addCase(getByManufacturer.fulfilled, (state, action) => {
                 const {page, data} = action.payload;
                 state.current_page = +page;
                 state.devices = data;
@@ -93,16 +117,9 @@ const deviceSlice = createSlice({
             .addCase(getById.fulfilled, (state, action) => {
                 state.deviceById = action.payload
             })
-
-    // .addCase(getMoviesByTitle.fulfilled, (state, action) => {
-    //     const {results} = action.payload;
-    //     state.moviesByTitle = results
-    // })
-    // .addMatcher(!isFulfilled(getMoviesByTitle), (state) => {
-    //     state.error = 'Movies not found'
-    // })
-
-
+            .addCase(closeDevice.fulfilled, (state, action) => {
+                state.deviceById = action.payload
+            })
 })
 
 const {reducer: deviceReducer, actions} = deviceSlice;
@@ -110,8 +127,11 @@ const {reducer: deviceReducer, actions} = deviceSlice;
 const deviceActions = {
     ...actions,
     getAllDevices,
+    getByModel,
     getByStatus,
+    getByManufacturer,
     getById,
+    closeDevice
 }
 
 export {

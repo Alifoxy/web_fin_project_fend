@@ -1,5 +1,4 @@
 import {createAsyncThunk, createSlice} from "@reduxjs/toolkit";
-
 import {recordService} from "../../services";
 import {INewRecord} from "../../interfaces";
 
@@ -9,9 +8,6 @@ interface IState {
     isNewSuccess: boolean,
     isNewLoading: boolean,
     new_message: unknown|string
-
-    // moviesByTitle:IMovie[],
-
 }
 
 const initialState: IState = {
@@ -20,33 +16,22 @@ const initialState: IState = {
     isNewSuccess: false,
     isNewLoading: false,
     new_message:''
-
-
 }
-
-// recordData:{client:{name: '', surname: '', email: '', phone: ''} , devices: [{model: '', equipment: '', break_info:'' }]}
-// {client:{name: '', surname: '', email: '', phone: ''} , devices: [{model: '', equipment: '', break_info:'' }]}
-
 
 const createNew = createAsyncThunk<INewRecord, INewRecord>(
     'newSlice/createNewRecord',
     async (body, thunkAPI ) => {
         try {
             const {data} = await recordService.createNew(body);
-            return data// The resolved value will be the payload of the fulfilled action
+            return data
         } catch (error:any) {
             const message =  error.message
-            // Use the error message from the backend if available, otherwise a generic message
             return thunkAPI.rejectWithValue(message)
-
         }
     }
 );
 
-
-// const selectRecordState = (state:IState) => state;
-
-const createNewSlice = createSlice({
+const createNewRecordSlice = createSlice({
     name: 'newSlice',
     initialState,
     reducers: {
@@ -72,29 +57,18 @@ const createNewSlice = createSlice({
             .addCase(createNew.rejected, (state, action) => {
                 state.isNewLoading = false;
                 state.isNewError = true;
-                state.new_message = 'Oopsie, something went wrong!'; // The error message from thunkAPI.rejectWithValue
+                state.new_message = 'Oops, something went wrong!';
             })
-
-    // .addCase(getMoviesByTitle.fulfilled, (state, action) => {
-    //     const {results} = action.payload;
-    //     state.moviesByTitle = results
-    // })
-    // .addMatcher(!isFulfilled(getMoviesByTitle), (state) => {
-    //     state.error = 'Movies not found'
-    // })
-
-
 })
 
-const {reducer: createNewReducer, actions} = createNewSlice
+const {reducer: createNewReducer, actions} = createNewRecordSlice
 
-export const { resetNew } = createNewSlice.actions;
+export const { resetNew } = createNewRecordSlice.actions;
 
 const createNewActions = {
     ...actions,
     createNew,
 }
-
 
 export {
     createNewReducer,

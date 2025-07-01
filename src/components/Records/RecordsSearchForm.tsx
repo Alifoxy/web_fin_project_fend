@@ -16,7 +16,7 @@ const RecordsForm = () => {
     const handleChange = (event:any) => {
         setNumber(event.target.value)
     }
-    // SubmitHandler<any>
+
     const search:SubmitHandler<any> = () => {
         reset()
         navigate(`${number}`)
@@ -34,10 +34,6 @@ const RecordsForm = () => {
                     </div>
                 </form>
 
-            {/*<form onSubmit={handleSubmit(search)}>*/}
-            {/*    <input type="text" placeholder={'find by number'} value={number} onChange={handleChange}/>*/}
-            {/*    <button className={'button'} disabled={!number}>{number ? 'search' : 'enter record number'}</button>*/}
-            {/*</form>*/}
         </div>
 
     );

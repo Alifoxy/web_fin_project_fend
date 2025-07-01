@@ -11,15 +11,12 @@ const ManufacturerCreateForm: FC<IProps> = () => {
     const [body, setBody]= useState({manufacturer:''})
     const dispatch = useDispatch();
     const navigate = useNavigate();
-    
 
     const handleManufacturerChange =  (event: React.ChangeEvent<HTMLInputElement>) => {
         const {value} = event.target;
         setBody({manufacturer: value});
 
     }
-
-
 
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
@@ -37,21 +34,16 @@ const ManufacturerCreateForm: FC<IProps> = () => {
         }
         if (isMaError) {
             alert(`Error: ${message}`);
-            // dispatch(reset());// Or a more sophisticated notification
         }
         if (isMaSuccess && newManufacturer) {
             alert(`${message}`);
             redirectToSuccess()
-            // dispatch(reset());
-            // Optionally redirect or clear form
         }
-        // Clean up state on unmount or after success/error
+
         return () => {
             dispatch(resetM());
         };
     }, [newManufacturer, message, dispatch, body.manufacturer, navigate, isMaError, isMaSuccess]);
-
-    
 
     return (
         <div className={'records'}>

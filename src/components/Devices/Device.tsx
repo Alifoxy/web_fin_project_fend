@@ -1,80 +1,80 @@
-import React, {FC, PropsWithChildren, useEffect, useState} from "react";
+import React, {FC, PropsWithChildren, useState} from "react";
 import '../Styles/RecordsStyle.css';
 import {useNavigate} from "react-router-dom";
 import {IDeviceDetails} from "../../interfaces";
 import {useAppDispatch, useAppSelector} from "../../hooks";
 import {changeStatusActions, resetCh} from "../../store/slices/changeStatusSlice";
-import {useSelector} from "react-redux";
+import {resetM} from "../../store/slices/create_deleteManufacturerSlice";
 
 interface IProps extends PropsWithChildren {
     SetDevice:IDeviceDetails
 
 }
 const Device: FC<IProps> = ({SetDevice}) => {
-    const {id:device_id, model, status_name} = SetDevice;
-    const { changeStatus, isChError, isChSuccess, message } = useSelector((state:any) => state.change_status);
+    const {id:device_id, model, status, manufacturer_name} = SetDevice;
     const {statuses} = useAppSelector(state => state.statuses);
+    const {manufacturers} = useAppSelector(state => state.manufacturers);
     const dispatch = useAppDispatch();
-    const [value, setValue] = useState(status_name)
+    const [valueS, setValueS] = useState(status.status)
+    const [valueM, setValueM] = useState(manufacturer_name)
     const navigate = useNavigate()
 
     const toGetRecDet = () => {
         navigate(`${device_id}/details`)
     };
 
-    useEffect(() => {
-        if (isChError) {
-            alert(`Error: ${message}`);
-
-        }
-        if (isChSuccess && changeStatus) {
-            alert(`${message}`);
-
-        }
-
-        return () => {
-            dispatch(resetCh());
-        };
-    }, [changeStatus, dispatch, isChError, isChSuccess, message])
-
-
-    // value={status.status}
-    // const handleStatusChange =  (event: React.ChangeEvent<HTMLSelectElement>) => {
-    //     // setStat(event.target.value);
-    //     // const {value} = event.target;
-    //     console.log(body)
-    //     dispatch(changeStatusActions.changeDeviceStatus({id:device_id, status: {status:event.target.value}}))
-    //
-    //     // await dispatch(changeStatusActions.changeDeviceStatus(body))
-    // }
-
     const handleStatusChange =  (event: React.ChangeEvent<HTMLSelectElement>) => {
         const newStatus = (event.target.value)
-        setValue(newStatus);
-        // const {value} = event.target;
+        setValueS(newStatus);
         console.log(newStatus)
-        if( newStatus ){
-            const body = {status:newStatus}
-            console.log('THIS IS BODY!!!!!!' , body)
-            dispatch(changeStatusActions.changeDeviceStatus({id:device_id, body}))
-        }else{
+        if (newStatus) {
+            const body = {status: newStatus}
+            console.log('THIS IS BODY!!!!!!', body)
+            dispatch(changeStatusActions.changeDeviceStatus({id: device_id, body}))
+
+        } else {
             dispatch(resetCh())
+
+        }
+
+    }
+
+    const handleManufacturerChange =  (event: React.ChangeEvent<HTMLSelectElement>) => {
+        const newManufacturer = (event.target.value)
+        setValueM(newManufacturer);
+        console.log(newManufacturer)
+        if( newManufacturer||''){
+            const body = {manufacturer:newManufacturer}
+            console.log('THIS IS BODY!!!!!!' , body)
+            dispatch(changeStatusActions.changeDeviceManufacturer({id:device_id, body}))
+
+        }else{
+            dispatch(resetM())
 
         }
     }
     
-    const status = statuses.map(function(status ) {
-        return <option className={'record_item'} key={status.id}  value={status.status}>{status.status}</option>
+    const stat = statuses.map(function(status ) {
+        return <option className={'record_item'} key={status.id}  value={status.status} >{status.status}</option>
     });
-    
+
+    const man = manufacturers.map(function(manufacturer ) {
+        return <option className={'record_item'} key={manufacturer.id}  value={manufacturer.manufacturer} >{manufacturer.manufacturer}</option>
+    });
+
     return (
         <div className={'record'}>
-            <div>{model}</div>
-            <div>
-                <select value={value}  onChange={handleStatusChange} >
-                        {status}
-                    {/*<option value="someOption">Some option</option>*/}
-                    {/*<option value="otherOption">Other option</option>*/}
+            <div className={'table_item'}>{model}</div>
+            <div className={'table_item'}>
+                <select value={valueS||''} onChange={handleStatusChange} className={'select_input'}>
+                    <option value=''></option>
+                    {stat}
+                </select>
+            </div>
+            <div className={'table_item'}>
+                <select value={valueM || ''} onChange={handleManufacturerChange}  disabled={ !status.manufacturer_required} className={'select_input'}>
+                    <option value=''></option>
+                    {man}
                 </select>
             </div>
 

@@ -1,34 +1,32 @@
-import {useNavigate, useParams, useSearchParams} from "react-router-dom";
+import {useNavigate, useSearchParams} from "react-router-dom";
 import React, {useEffect, useState} from "react";
 import {useAppSelector} from "../../hooks";
-
 
 const StatusSelectSearch = () => {
     const [,setQuery] = useSearchParams({query:''})
     const {statuses} = useAppSelector(state => state.statuses);
+    const {current_page} = useAppSelector(state => state.devices);
     const [value, setValue] = useState('')
-    const {page} = useParams()
     const navigate = useNavigate();
 
     useEffect(() => {
         setQuery(value)
     }, [setQuery, value])
 
-
     const handleStatusChange =  (event: React.ChangeEvent<HTMLSelectElement>) => {
         const newStatus = (event.target.value)
         setValue(newStatus);
-        // const {value} = event.target;
-        console.log(newStatus)
-        if( newStatus ){
-            navigate(`${value}/${page}`)
-        }else{
-            console.log('something went wrong!')
 
+        console.log(newStatus)
+
+        if (newStatus) {
+            navigate(`search/status/${newStatus}/${current_page}`)
+        } else {
+            console.log('something went wrong!')
         }
     }
 
-    const status = statuses.map(function(status ) {
+    const stat = statuses.map(function(status ) {
         return <option className={'record_item'} key={status.id}  value={status.status}>{status.status}</option>
     });
 
@@ -39,7 +37,7 @@ const StatusSelectSearch = () => {
             </div>
             <div>
                 <select value={value} onChange={handleStatusChange}>
-                    {status}
+                    {stat}
                 </select>
             </div>
         </div>

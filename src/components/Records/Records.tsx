@@ -30,17 +30,16 @@ const Records: FC<IProps> = () => {
         })
         navigate(`${current_page}`)
     };
-//     < div
-//     className = {'genres_block'} >
-//         < div
-//     className = {'inner_gen_block'} >
-//
-//         < /div>
-// </div>
+
     console.log(records)
     return (
         <div>
             <div className={'records'}>
+                <div className={'table_labels'}>
+                    <div className={'table_label_item'}>Номер</div>
+                    <div className={'table_label_item'}>Дата створення</div>
+                    <div className={'table_label_item'}>Статус</div>
+                </div>
                 {records.map((record => <Record key={record.id} SetRecord={record}/>))}
             </div>
             <div className={'pagination_div'}>

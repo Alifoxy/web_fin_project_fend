@@ -1,5 +1,6 @@
-import '../components/Styles/MainStyle.css';
+import '../../components/Styles/MainStyle.css';
 const ErrorPage = () => {
+
     return (
         <div>
             <div >

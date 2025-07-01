@@ -35,6 +35,10 @@ const Clients: FC<IProps> = () => {
     return (
         <div>
             <div className={'records'}>
+                <div className={'table_labels'}>
+                    <div className={'table_label_item'}>Прізвище</div>
+                    <div className={'table_label_item'}>Номер телефону</div>
+                </div>
                 {clients.map((client => <Client key={client.id} SetClient={client}/>))}
             </div>
             <div className={'pagination_div'}>

@@ -4,7 +4,6 @@ import {RecordDetails} from "./RecordDetails";
 import {useAppDispatch, useAppSelector} from "../../hooks";
 import {recordsActions} from "../../store";
 import '../Styles/RecordsStyle.css';
-// import {DetailsDiv} from "../Style/DetailsStyledComponents";
 
 interface IProps extends PropsWithChildren {
 }

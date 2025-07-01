@@ -1,4 +1,4 @@
-import {Records, RecordsPageForm} from "../components";
+import {Records, RecordsPageForm} from "../../components";
 import React from "react";
 
 const RecordsPage = () => {

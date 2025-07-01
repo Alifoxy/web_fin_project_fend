@@ -1,4 +1,4 @@
-import {GetClientDetails} from "../components";
+import {GetClientDetails} from '../../components';
 
 const ClientDetailsPage = () => {
     return (

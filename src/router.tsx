@@ -22,14 +22,17 @@ import {
     StatusesPage,
     StatusesSuccessPage,
     StatusesCreatePage,
-    ManufacturersCreatePage,
+    ManufacturersCreatePage, DevicesByManufacturerPage, DevicesByModelPage,
 } from "./pages";
-import {DevicesByStatusPage} from "./pages/devices/DevicesByStatusPage";
+import {DevicesByStatusPage} from "./pages";
+import {NoBaseStatusPage} from "./pages";
+import {StatusExistsPage} from "./pages/errors/StatusExists";
+import {StatusParamsConflictPage} from "./pages/errors/StatusParamsConflictPage";
+import {StatusParamsExistsPage} from "./pages/errors/StatusParamsExistsPage";
 
 const router = createBrowserRouter([
     {
         path: '', element: <MainLayout/>, errorElement: <ErrorPage/>, children: [
-
             {
                 index: true, element: <Navigate to={'records/1'}/>
             },
@@ -42,6 +45,9 @@ const router = createBrowserRouter([
             },
             {
                 path: 'records_create/client_exists',element:<ClientExistsPage/>,
+            },
+            {
+                path: 'records_create/no_base_status',element:<NoBaseStatusPage/>,
             },
             {
                 path: 'records_create/client_exists/success/new',element:<CreateNewSuccessPage/>,
@@ -83,6 +89,15 @@ const router = createBrowserRouter([
                     {
                         path: 'success',element: <StatusesSuccessPage/>
                     },
+                    {
+                        path: 'error_exists',element: <StatusExistsPage/>
+                    },
+                    {
+                        path: 'error_params_conflict',element: <StatusParamsConflictPage/>
+                    },
+                    {
+                        path: 'error_params_exist',element: <StatusParamsExistsPage/>
+                    },
 
                 ]
             },
@@ -101,9 +116,6 @@ const router = createBrowserRouter([
 
                 ]
             },
-            // {
-            //     path: 'manufacturers/create_success', element: <ManufacturersSuccessPage/>
-            // },
             {
                 path: 'records/:record_id/details', element: <RecordDetailsPage/>
             },
@@ -123,7 +135,6 @@ const router = createBrowserRouter([
                     },
                 ]
             },
-
             {
                 path: 'records/search/:rec_num/:record_id/details',element: <RecordDetailsPage/>
             },
@@ -135,42 +146,41 @@ const router = createBrowserRouter([
                 ]
             },
             {
-                path: 'devices/search',element: <DevicesByStatusPage/>, children:[
+                path: 'devices/search/status/:status',element: <DevicesByStatusPage/>, children:[
                     {
-                        path: ':status/:page', element: <DevicesByStatusPage/>
+                        path: ':page', element: <DevicesByStatusPage/>
                     },
                 ]
-
             },
             {
-                path: 'devices/search/:device_id/details',element: <DeviceDetailsPage/>
+                path: 'devices/search/status/:status/:device_id/details',element: <DeviceDetailsPage/>
             },
-
+            {
+                path: 'devices/search/manufacturer/:manufacturer',element: <DevicesByManufacturerPage/>, children:[
+                    {
+                        path: ':page', element: <DevicesByManufacturerPage/>
+                    },
+                ]
+            },
+            {
+                path: 'devices/search/manufacturer/:manufacturer/:device_id/details',element: <DeviceDetailsPage/>
+            },
+            {
+                path: 'devices/search/model/:search',element: <DevicesByModelPage/>, children:[
+                    {
+                        path: ':page', element: <DevicesByModelPage/>
+                    },
+                ]
+            },
+            {
+                path: 'devices/search/model/:search/:device_id/details',element: <DeviceDetailsPage/>
+            },
             {
                 path: 'clients/search/:phone_num/:client_id/details',element: <ClientDetailsPage/>
             },
             {
                 path: 'clients/search/:phone_num/:client_id/details/record/:record_id',element: <RecordDetailsPage/>
             },
-
-            // {
-            //     path: 'search',element: <SearchPage/>, children:[
-            //         {
-            //             path: ':genre_id/:genre_name', element: <MoviesByGenrePage/>
-            //         },
-            //         {
-            //             path: ':query', element: <MoviesByTitlePage/>
-            //         },
-            //     ]
-            // },
-
-            // {
-            //     path: 'search/:genre_id/:genre_name/details/:movie_id', element: <MovieDetailsPage/>
-            // },
-            // {
-            //     path: 'search/:query/details/:movie_id', element: <MovieDetailsPage/>
-            // },
-
         ]
     }
 ]);

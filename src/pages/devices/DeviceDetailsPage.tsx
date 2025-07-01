@@ -1,6 +1,7 @@
 import {GetDeviceDetails} from "../../components";
 
 const DeviceDetailsPage = () => {
+
     return (
         <div>
             <div className={'record_page'}>

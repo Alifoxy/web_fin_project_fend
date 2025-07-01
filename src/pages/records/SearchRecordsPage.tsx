@@ -1,13 +1,13 @@
+// import {OuterDiv} from "../components/Style/MainStyledComponents";
 import React from "react";
+import {RecordsForm} from "../../components";
 import {Outlet} from "react-router-dom";
-import {StatusSelectSearch} from "../../components";
-import {DevicesByStatusPage} from "./DevicesByStatusPage";
 
-const SearchDevicesPage = () => {
+const SearchRecordsPage = () => {
     return (
         <div>
             <div className={'record_page'}>
-                <StatusSelectSearch/>
+                <RecordsForm/>
                 <Outlet/>
             </div>
         </div>
@@ -16,4 +16,4 @@ const SearchDevicesPage = () => {
     );
 };
 
-export {SearchDevicesPage};
+export {SearchRecordsPage};

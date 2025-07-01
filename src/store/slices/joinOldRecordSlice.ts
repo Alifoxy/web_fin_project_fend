@@ -1,5 +1,4 @@
 import {createAsyncThunk, createSlice} from "@reduxjs/toolkit";
-
 import {recordService} from "../../services";
 import {INewRecord} from "../../interfaces";
 
@@ -9,9 +8,6 @@ interface IState {
     isJoinSuccess: boolean,
     isJoinLoading: boolean,
     join_message: unknown|string
-
-    // moviesByTitle:IMovie[],
-
 }
 
 const initialState: IState = {
@@ -20,32 +16,21 @@ const initialState: IState = {
     isJoinSuccess: false,
     isJoinLoading: false,
     join_message:''
-
-
 }
-
-// recordData:{client:{name: '', surname: '', email: '', phone: ''} , devices: [{model: '', equipment: '', break_info:'' }]}
-// {client:{name: '', surname: '', email: '', phone: ''} , devices: [{model: '', equipment: '', break_info:'' }]}
-
 
 const joinOld = createAsyncThunk<INewRecord, INewRecord>(
     'joinOldSlice/joinOldRecord',
     async (body, thunkAPI ) => {
         try {
             const {data} = await recordService.joinOld(body);
-            return data// The resolved value will be the payload of the fulfilled action
+            return data
         } catch (error:any) {
-            // Use the error message from the backend if available, otherwise a generic message
             return thunkAPI.rejectWithValue(error.response.data)
-
         }
     }
 );
 
-
-// const selectRecordState = (state:IState) => state;
-
-const joinOldSlice = createSlice({
+const joinOldRecordSlice = createSlice({
     name: 'joinOldSlice',
     initialState,
     reducers: {
@@ -71,29 +56,18 @@ const joinOldSlice = createSlice({
             .addCase(joinOld.rejected, (state, action) => {
                 state.isJoinLoading = false;
                 state.isJoinError = true;
-                state.join_message = 'Oopsie, something went wrong!'; // The error message from thunkAPI.rejectWithValue
+                state.join_message = 'Oops, something went wrong!';
             })
-
-    // .addCase(getMoviesByTitle.fulfilled, (state, action) => {
-    //     const {results} = action.payload;
-    //     state.moviesByTitle = results
-    // })
-    // .addMatcher(!isFulfilled(getMoviesByTitle), (state) => {
-    //     state.error = 'Movies not found'
-    // })
-
-
 })
 
-const {reducer: joinOldReducer, actions} = joinOldSlice
+const {reducer: joinOldReducer, actions} = joinOldRecordSlice
 
-export const { resetJoin } = joinOldSlice.actions;
+export const { resetJoin } = joinOldRecordSlice.actions;
 
 const joinOldActions = {
     ...actions,
     joinOld,
 }
-
 
 export {
     joinOldReducer,

@@ -5,6 +5,7 @@ import React from "react";
 import {Outlet} from "react-router-dom";
 
 const ManufacturersCreatePage = () => {
+
     return (
         <div>
             <div className={'record_page'}>

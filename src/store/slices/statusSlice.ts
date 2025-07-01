@@ -1,9 +1,10 @@
 import {createAsyncThunk, createSlice} from "@reduxjs/toolkit";
 
 import {IStatus, IStatuses} from "../../interfaces";
-import {statusService} from "../../services/statusService";
+import {statusService} from "../../services";
 
 interface IState {
+    status: IStatus|null
     statuses: IStatus[],
     statusByName: IStatuses|null,
     total_pages:number,
@@ -11,11 +12,11 @@ interface IState {
 }
 
 const initialState: IState = {
+    status:null,
     statuses: [],
     statusByName: null,
     total_pages: 10,
     current_page:0,
-
 }
 
 const getStatusesByPage = createAsyncThunk<IStatuses, {page:string|undefined}>(
@@ -27,7 +28,6 @@ const getStatusesByPage = createAsyncThunk<IStatuses, {page:string|undefined}>(
         } catch (error:any) {
             return thunkAPI.rejectWithValue(error.response.data)
         }
-
     }
 )
 
@@ -40,7 +40,6 @@ const getAllStatuses = createAsyncThunk<IStatuses>(
         } catch (error:any) {
             return thunkAPI.rejectWithValue(error.response.data)
         }
-
     }
 )
 
@@ -53,27 +52,14 @@ const getByName = createAsyncThunk<IStatuses, {name:string|undefined}>(
         } catch (error:any) {
             return thunkAPI.rejectWithValue(error.response.data)
         }
-
-    }
-)
-
-const setStatus = createAsyncThunk<IStatuses, {name:string|undefined}>(
-    'statusSlice/getRecordById',
-    async ({name}, thunkAPI) => {
-        try {
-            const {data} = await statusService.getStatusByName(name);
-            return data
-        } catch (error:any) {
-            return thunkAPI.rejectWithValue(error.response.data)
-        }
-
     }
 )
 
 const statusSlice = createSlice({
     name: 'statusSlice',
     initialState,
-    reducers: {},
+    reducers: {
+    },
     extraReducers: builder =>
         builder
             .addCase(getStatusesByPage.fulfilled, (state, action) => {
@@ -88,8 +74,6 @@ const statusSlice = createSlice({
             .addCase(getByName.fulfilled, (state, action) => {
                 state.statusByName = action.payload
             })
-
-
 })
 
 const {reducer: statusesReducer, actions} = statusSlice
@@ -100,7 +84,6 @@ const statusesActions = {
     getStatusesByPage,
     getByName,
 }
-
 
 export {
     statusesReducer,

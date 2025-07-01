@@ -1,15 +1,12 @@
 import {createAsyncThunk, createSlice} from "@reduxjs/toolkit";
-
-import {clientService} from "../../services/clientService";
+import {clientService} from "../../services";
 import {IClientDetails, IClients} from "../../interfaces";
-
 
 interface IState {
     clients: IClientDetails[],
     isError: boolean,
     isSuccess: boolean,
     isLoading: boolean,
-    // new_cli: boolean,
     temp:boolean,
     clientById: IClientDetails|null,
     total_pages:number,
@@ -21,15 +18,11 @@ const initialState: IState = {
     isError: false,
     isSuccess: false,
     isLoading: false,
-    // new_cli:false,
     temp:true,
     clientById:null,
     total_pages: 50,
     current_page:0,
-
 };
-
-
 
 const getAllClients = createAsyncThunk<IClients, {page:string|undefined}>(
 
@@ -41,22 +34,8 @@ const getAllClients = createAsyncThunk<IClients, {page:string|undefined}>(
         } catch (error:any) {
             return thunkAPI.rejectWithValue(error.response.data)
         }
-
     }
 )
-
-// const getByParams = createAsyncThunk<IClients, void>(
-//     'clientSlice/getAll',
-//     async (_,thunkAPI) => {
-//         try {
-//             const {data} = await clientService.getByParams();
-//             return data
-//         } catch (error:any) {
-//             return thunkAPI.rejectWithValue(error.response.data)
-//         }
-//
-//     }
-// )
 
 const getById = createAsyncThunk<IClientDetails, {id:string}>(
     'clientSlice/getClientById',
@@ -67,7 +46,6 @@ const getById = createAsyncThunk<IClientDetails, {id:string}>(
         } catch (error:any) {
             return thunkAPI.rejectWithValue(error.response.data)
         }
-
     }
 )
 
@@ -80,7 +58,6 @@ const getClientsByPhone = createAsyncThunk<IClients, {phone_num:string|undefined
         } catch (error:any) {
             return thunkAPI.rejectWithValue(error.response.data)
         }
-
     }
 )
 
@@ -93,23 +70,8 @@ const clientExists = createAsyncThunk<IClients, {client_phone:string}>(
         } catch (error:any) {
             return thunkAPI.rejectWithValue(error.response.data)
         }
-
     }
 )
-//
-// const getMoviesByTitle = createAsyncThunk<IMovies, {query:string|undefined}>(
-//     'movieSlice/getByTitle',
-//     async ({query}, thunkAPI) => {
-//         try {
-//             const {data} = await movieService.getMoviesByTitle(query);
-//             return data
-//         } catch (error:any) {
-//             return thunkAPI.rejectWithValue(error.response.data)
-//         }
-//
-//     }
-// )
-
 
 const clientSlice = createSlice({
     name: 'clientSlice',
@@ -120,7 +82,6 @@ const clientSlice = createSlice({
             state.isSuccess = false;
             state.isError = false;
         },
-
     },
     extraReducers: builder =>
         builder
@@ -137,24 +98,10 @@ const clientSlice = createSlice({
                 state.clients = data
             })
             .addCase(clientExists.fulfilled, (state, action) => {
-                const {data} = action.payload
+                const {data} = action.payload;
+                state.clients = data
                 console.log('this is data_after!!!!!!!', action.payload.data)
-                // const temp =data.length !== 0;
-                // state.new_cli = data.length !== 0;
-                // console.log('CLIENTSLICE new_cli!!!!!!!', state.new_cli)
-
-
-
             })
-    // .addCase(getMoviesByTitle.fulfilled, (state, action) => {
-    //     const {results} = action.payload;
-    //     state.moviesByTitle = results
-    // })
-    // .addMatcher(!isFulfilled(getMoviesByTitle), (state) => {
-    //     state.error = 'Movies not found'
-    // })
-
-
 })
 
 const {reducer: clientsReducer, actions} = clientSlice;
@@ -162,14 +109,10 @@ const {reducer: clientsReducer, actions} = clientSlice;
 const clientsActions = {
     ...actions,
     getAllClients,
-    // getByParams,
     getById,
     clientExists,
     getClientsByPhone
 }
-
-// export const selectClientState = (state: {clientSlice: boolean} ) => state.clientSlice
-export const selectClientState = (state: any) => state.new_cli;
 
 export {
     clientsReducer,

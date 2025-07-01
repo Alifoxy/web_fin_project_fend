@@ -1,5 +1,5 @@
 import React from "react";
-import {ClientExists} from "../components/Clients/ClientExists";
+import {ClientExists} from "../../components/Clients/ClientExists";
 const ClientExistsPage = () => {
 
     return (

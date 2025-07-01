@@ -2,7 +2,6 @@ import {SubmitHandler, useForm} from "react-hook-form";
 import {useNavigate, useSearchParams} from "react-router-dom";
 import {useEffect, useState} from "react";
 
-
 const RecordsPageForm = () => {
     const {handleSubmit,reset} = useForm();
     const [,setQuery] = useSearchParams({query:''})
@@ -21,7 +20,7 @@ const RecordsPageForm = () => {
         reset()
         navigate(`search/${number}`)
     };
-    // onSubmit={handleSubmit(search)}
+
     return (
         <div>
             <div>

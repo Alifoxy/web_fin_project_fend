@@ -17,7 +17,7 @@ const Manufacturer: FC<IProps> = ({SetManufacturer}) => {
     const [refreshKey, setRefreshKey] = useState(false);
 
     useEffect(() => {
-        dispatch(manufacturersActions.getAllManufacturers({page}))
+        dispatch(manufacturersActions.getManufacturersByPage({page}))
     }, [dispatch, refreshKey, page])
 
     const DeleteM = async () => {
@@ -27,11 +27,11 @@ const Manufacturer: FC<IProps> = ({SetManufacturer}) => {
 
     return (
         <div className={'record'}>
-            <div>{manufacturer}</div>
-            <div>{created}</div>
+            <div  className={'table_item'}>{manufacturer}</div>
+            <div  className={'table_item'}>{created}</div>
 
-            <button className={'button1'} onClick={DeleteM}>
-                Видалити
+            <button className={'delete_button'} onClick={DeleteM}>
+                X
             </button>
         </div>
     );

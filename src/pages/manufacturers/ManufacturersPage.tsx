@@ -4,6 +4,7 @@ import {
 import React from "react";
 
 const ManufacturersPage = () => {
+
     return (
         <div>
             <div className={'record_page'}>

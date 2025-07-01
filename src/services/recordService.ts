@@ -13,6 +13,7 @@ const recordService = {
     joinOld: (body: INewRecord): IRes<INewRecord> => apiService.post(urls.records.joinOld, body),
 };
 
+
 export {
     recordService
 }

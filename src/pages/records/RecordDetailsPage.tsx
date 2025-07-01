@@ -1,4 +1,4 @@
-import {GetRecordDetails} from "../components";
+import {GetRecordDetails} from "../../components";
 
 const RecordDetailsPage = () => {
     return (

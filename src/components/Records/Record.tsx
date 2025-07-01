@@ -8,7 +8,15 @@ interface IProps extends PropsWithChildren {
 
 }
 const Record: FC<IProps> = ({SetRecord}) => {
-    const {record_num:number,id:record_id} = SetRecord;
+    const {record_num:number,id:record_id, created, is_closed} = SetRecord;
+
+    const setStatus = () =>{
+        if (is_closed){
+            return 'Закрито'
+        } else{
+            return 'Відкрито'
+        }
+    }
 
     const toGetRecDet = () => {
         navigate(`${record_id}/details`)
@@ -18,10 +26,14 @@ const Record: FC<IProps> = ({SetRecord}) => {
     
     return (
         <div className={'record'}>
-            Квитанція № {number}
-            <button className={'button1'} onClick={toGetRecDet}>
-                Детальніше...
-            </button>
+            <div className={'table_item'}>{number}</div>
+            <div className={'table_item'}>{created}</div>
+            <div className={'table_item'}>{setStatus()}</div>
+            <div>
+                <button className={'button1'} onClick={toGetRecDet}>
+                    Детальніше...
+                </button>
+            </div>
         </div>
     );
 };
