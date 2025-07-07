@@ -52,7 +52,7 @@ body{
 .check_div{
     display: flex;
     width: 300px;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: center;
     font-family: "Trebuchet MS", sans-serif;
     font-size: 20px;
