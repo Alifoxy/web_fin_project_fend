@@ -1,6 +1,6 @@
 import React, {FC, PropsWithChildren, useEffect, useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
-import {createRecordActions, resetCR, resetRec, setCli} from "../../store";
+import {createRecordActions, recordsActions, resetCR, resetDev, resetRec, setCli} from "../../store";
 import {useNavigate} from "react-router-dom";
 
 interface IProps extends PropsWithChildren {
@@ -34,6 +34,10 @@ const RecordsCreateForm: FC<IProps> = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
+    useEffect(() => {
+        setBody({client:client, devices:devices})
+    }, [dispatch, client, devices])
+
     const cli_filled = () => {
         const cli_empty = !client
         return !( cli_empty);
@@ -51,8 +55,6 @@ const RecordsCreateForm: FC<IProps> = () => {
 
     const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
         dispatch(resetRec())
-        setBody({client:client, devices:devices})
-        dispatch(setCli(body))
         event.preventDefault();
         console.log(body)
         // @ts-ignore
