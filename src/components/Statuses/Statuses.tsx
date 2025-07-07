@@ -36,13 +36,13 @@ const Statuses: FC<IProps> = () => {
     return (
         <div>
             <div className={'records'}>
-                <div className={'table_labels'}>
+                <div className={'table_labels table_labels2'}>
                     <div className={'table_label_item'}>Статус</div>
                     <div className={'table_label_item'}>Дата створення</div>
-                    <div className={'table_label_item table_label_item2'}>Вказувати виробника</div>
-                    <div className={'table_label_item table_label_item2'}>Базовий статус</div>
-                    <div className={'table_label_item table_label_item2'}>Статус для повернення</div>
-                    <div className={'table_label_item table_label_item2'}>Фінальний статус</div>
+                        <div className={'table_label_item table_label_item2'}>Вказувати виробника</div>
+                        <div className={'table_label_item table_label_item2'}>Базовий статус</div>
+                        <div className={'table_label_item table_label_item2'}>Статус для повернення</div>
+                        <div className={'table_label_item table_label_item2'}>Фінальний статус</div>
                 </div>
                 {statuses.map((status => <Status key={status.id} SetStatus={status}/>))}
             </div>

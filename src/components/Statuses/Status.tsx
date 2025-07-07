@@ -93,46 +93,46 @@ const Status: FC<IProps> = ({SetStatus}) => {
         <div className={'record'}>
             <div className={'table_item'}>{st}</div>
             <div className={'table_item'}>{created}</div>
-            <div className={'table_item2'}>
-                <div>
-                    <input
-                        className={'check_input'}
-                        type="checkbox"
-                        checked={m_rec}
-                        onChange={handleSMCheckboxChange}
-                    />
+                <div className={'table_item2'}>
+                    <div>
+                        <input
+                            className={'check_input'}
+                            type="checkbox"
+                            checked={m_rec}
+                            onChange={handleSMCheckboxChange}
+                        />
+                    </div>
                 </div>
-            </div>
-            <div className={'table_item2'}>
-                <div>
-                    <input
-                        className={'check_input'}
-                        type="checkbox"
-                        checked={is_default}
-                        onChange={handleSDCheckboxChange}
-                    />
+                <div className={'table_item2'}>
+                    <div>
+                        <input
+                            className={'check_input'}
+                            type="checkbox"
+                            checked={is_default}
+                            onChange={handleSDCheckboxChange}
+                        />
+                    </div>
                 </div>
-            </div>
-            <div className={'table_item2'}>
-                <div>
-                    <input
-                        className={'check_input'}
-                        type="checkbox"
-                        checked={is_return_ready}
-                        onChange={handleRRCheckboxChange}
-                    />
+                <div className={'table_item2'}>
+                    <div>
+                        <input
+                            className={'check_input'}
+                            type="checkbox"
+                            checked={is_return_ready}
+                            onChange={handleRRCheckboxChange}
+                        />
+                    </div>
                 </div>
-            </div>
-            <div className={'table_item2'}>
-                <div>
-                    <input
-                        className={'check_input'}
-                        type="checkbox"
-                        checked={is_final}
-                        onChange={handleSFCheckboxChange}
-                    />
+                <div className={'table_item2'}>
+                    <div>
+                        <input
+                            className={'check_input'}
+                            type="checkbox"
+                            checked={is_final}
+                            onChange={handleSFCheckboxChange}
+                        />
+                    </div>
                 </div>
-            </div>
             <button className={'delete_button'} onClick={DeleteS}>X</button>
         </div>
     );
