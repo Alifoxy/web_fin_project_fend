@@ -2,7 +2,6 @@ import {SubmitHandler, useForm} from "react-hook-form";
 import {useNavigate, useSearchParams} from "react-router-dom";
 import {useEffect, useState} from "react";
 
-
 const RecordsForm = () => {
     const {handleSubmit,reset} = useForm();
     const [,setQuery] = useSearchParams({query:''})
@@ -33,9 +32,7 @@ const RecordsForm = () => {
                         <button type="submit" onSubmit={search} className={'button1'} disabled={!number}>{number ? 'Знайти' : 'Введіть номер квитанції'}</button>
                     </div>
                 </form>
-
         </div>
-
     );
 };
 

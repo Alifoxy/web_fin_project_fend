@@ -36,12 +36,12 @@ const StatusSelectSearch = () => {
                 <h2 className={'title3'}>Знайти пристрої за статусом</h2>
             </div>
             <div>
-                <select value={value} onChange={handleStatusChange}>
+                <select value={value||''} onChange={handleStatusChange} className={'select_input'}>
+                    <option value=''></option>
                     {stat}
                 </select>
             </div>
         </div>
-
     );
 };
 

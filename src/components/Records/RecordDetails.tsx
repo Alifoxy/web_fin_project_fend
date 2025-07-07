@@ -1,26 +1,24 @@
-import React, {FC, PropsWithChildren} from "react";
+import React, {FC, PropsWithChildren, useState} from "react";
 import {IRecordDetails} from "../../interfaces";
-import '../Styles/RecordsStyle.css';
 import {useDispatch} from "react-redux";
-import {deviceActions} from "../../store";
+import {deviceActions, resetDev, resetStCh} from "../../store";
 import {useNavigate} from "react-router-dom";
 
-interface IProps extends PropsWithChildren {
+interface IProps extends PropsWithChildren{
     RecordDetails: IRecordDetails
 }
+// @ts-ignore
 const RecordDetails: FC<IProps> = ({RecordDetails}) => {
-    const {id, record_num, client, devices, created, is_closed} = RecordDetails;
+    const {record_num, client, devices, created, is_closed} = RecordDetails;
     const dispatch = useDispatch();
     const navigate = useNavigate();
     console.log(RecordDetails)
 
-
-    const record_device = devices.map(function(device ) {
+    const record_device = devices.map(function (device) {
         const handleCloseRecord = () => {
             console.log(device.id)
             // @ts-ignore
             dispatch(deviceActions.closeDevice({id: device.id}))
-
         }
 
         return <li className={'device'} key={device.id}>
@@ -28,13 +26,26 @@ const RecordDetails: FC<IProps> = ({RecordDetails}) => {
             <div>Комплектація: {device.equipment}</div>
             <div>Тип поломки: {device.break_info}</div>
             <div>Статус: {device.status.status}</div>
-            <button onClick={handleCloseRecord} className={'button1 '} disabled={!device.status.is_return_ready}>Видано</button>
+            { device.status.is_return_ready ? (
+                <button onClick={handleCloseRecord} className={'button1 '}
+                        disabled={!device.status.is_return_ready}>Видано
+                </button>
+            ) : device.status.is_final ?(
+                <p className={"device_returned"}>Пристрій виданий клієнту!.</p> // Or render nothing here
+            ) : (
+                <p className={"device_not_ready"} >Пристрій ще не готовий до видачі.</p>
+            )}
         </li>
     });
 
-    const handlePrintRecord = () => {
+    const NavToPrint = async () => {
+        navigate(`print`)
+    }
 
-
+    const HandlePrint = () => {
+        NavToPrint().then(() =>
+            window.print()
+        )
     }
 
     return (
@@ -57,13 +68,15 @@ const RecordDetails: FC<IProps> = ({RecordDetails}) => {
                         {record_device}
                     </ul>
                 </div>
-                <button onClick={handlePrintRecord} className={'button1 '}
-                        disabled={!is_closed}>Роздрукувати
-                </button>
+                <div>
+                    <button className={'button1'} onClick={HandlePrint} disabled={!is_closed}>Роздрукувати чек</button>
+                </div>
             </div>
         </div>
 
     );
-};
+}
 
-export {RecordDetails};
+
+
+export {RecordDetails}

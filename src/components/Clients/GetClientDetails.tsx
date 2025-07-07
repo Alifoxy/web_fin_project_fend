@@ -2,9 +2,7 @@ import React, {FC, PropsWithChildren, useEffect} from "react";
 import {ClientDetails} from "./ClientDetails";
 import {clientsActions} from '../../store';
 import {useAppDispatch, useAppSelector} from "../../hooks";
-import '../Styles/RecordsStyle.css';
 import {useNavigate, useParams} from "react-router-dom";
-
 
 interface IProps extends PropsWithChildren {
 }

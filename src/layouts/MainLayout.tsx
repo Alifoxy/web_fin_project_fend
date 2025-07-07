@@ -6,8 +6,12 @@ const MainLayout = () => {
 
     return (
         <div className={'layout_div'}>
-            <Header/>
-            <Outlet/>
+            <div>
+                <Header/>
+            </div>
+            <div className={'content_div'}>
+                <Outlet/>
+            </div>
         </div>
     );
 };

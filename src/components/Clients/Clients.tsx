@@ -2,11 +2,9 @@ import React, {ChangeEvent, FC, PropsWithChildren, useEffect} from "react";
 import {Client} from "./Client";
 import {clientsActions} from '../../store';
 import {useAppDispatch, useAppSelector} from "../../hooks";
-import '../Styles/RecordsStyle.css';
 import Stack from "@mui/material/Stack";
 import Pagination from "@mui/material/Pagination";
 import {useNavigate, useParams, useSearchParams} from "react-router-dom";
-
 
 interface IProps extends PropsWithChildren {
 }
@@ -31,12 +29,12 @@ const Clients: FC<IProps> = () => {
         navigate(`${current_page}`)
     };
 
-    console.log(clients)
     return (
         <div>
             <div className={'records'}>
                 <div className={'table_labels'}>
                     <div className={'table_label_item'}>Прізвище</div>
+                    <div className={'table_label_item'}>Ім'я</div>
                     <div className={'table_label_item'}>Номер телефону</div>
                 </div>
                 {clients.map((client => <Client key={client.id} SetClient={client}/>))}
@@ -48,7 +46,6 @@ const Clients: FC<IProps> = () => {
                 </Stack>
             </div>
         </div>
-
     )
 };
 

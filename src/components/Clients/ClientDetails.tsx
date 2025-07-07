@@ -36,7 +36,6 @@ const ClientDetails: FC<IProps> = ({ClientDetails}) => {
                 </div>
             </div>
         </div>
-
     );
 };
 

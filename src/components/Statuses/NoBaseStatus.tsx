@@ -29,9 +29,7 @@ const NoBaseStatus = () => {
                     <button onClick={NavigateToStatusCreation}  className={'button1'}>Створити статус</button>
                 </div>
             </div>
-
         </div>
-
     );
 };
 

@@ -1,12 +1,11 @@
 import React, {FC, PropsWithChildren} from "react";
 import {IRecordDetails} from "../../interfaces";
-import '../Styles/RecordsStyle.css';
 import {useNavigate} from "react-router-dom";
 
 interface IProps extends PropsWithChildren {
     SetRecord:IRecordDetails
-
 }
+
 const Record: FC<IProps> = ({SetRecord}) => {
     const {record_num:number,id:record_id, created, is_closed} = SetRecord;
 

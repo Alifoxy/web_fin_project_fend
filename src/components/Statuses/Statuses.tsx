@@ -1,7 +1,6 @@
 import React, {ChangeEvent, FC, PropsWithChildren, useEffect} from "react";
 import {Status} from "./Status";
 import {useAppDispatch, useAppSelector} from "../../hooks";
-import '../Styles/RecordsStyle.css';
 import Stack from "@mui/material/Stack";
 import Pagination from "@mui/material/Pagination";
 import {useNavigate, useParams, useSearchParams} from "react-router-dom";
@@ -14,18 +13,16 @@ interface IProps extends PropsWithChildren {
 
 const Statuses: FC<IProps> = () => {
     const {statuses, total_pages, current_page} = useAppSelector(state => state.statuses);
-    const { status, isSPSuccess} = useSelector((state:any) => state.change_status_params);
+    const {isStSuccess} = useSelector((state:any) => state.create_delete_statuses);
+    const {status, isSPSuccess} = useSelector((state:any) => state.change_status_params);
     const [query, setQuery]= useSearchParams({page: '1'})
     const dispatch = useAppDispatch();
     const navigate = useNavigate();
     const {page} = useParams()
 
     useEffect(() => {
-        if(isSPSuccess){
-            dispatch(statusesActions.getStatusesByPage({page}))
-        }
         dispatch(statusesActions.getStatusesByPage({page}))
-    }, [dispatch, query, page, status, isSPSuccess])
+    }, [dispatch, query, page, status, isSPSuccess, isStSuccess])
 
     const handleChange = (event:ChangeEvent<unknown> , value:number) => {
         let current_page = value
@@ -56,7 +53,6 @@ const Statuses: FC<IProps> = () => {
                 </Stack>
             </div>
         </div>
-
     )
 };
 

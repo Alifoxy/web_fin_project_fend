@@ -1,6 +1,6 @@
 import React, {FC, PropsWithChildren, useEffect} from "react";
 import {DeviceDetails} from "./DeviceDetails";
-import {deviceActions} from '../../store';
+import {deviceActions, resetDev} from '../../store';
 import {useAppDispatch, useAppSelector} from "../../hooks";
 import '../Styles/RecordsStyle.css';
 import {useNavigate, useParams} from "react-router-dom";
@@ -11,6 +11,7 @@ interface IProps extends PropsWithChildren {
 
 const GetDeviceDetails: FC<IProps> = () => {
     const {deviceById} = useAppSelector(state => state.devices);
+    const {notes_changed, price_changed} = useAppSelector(state => state.devices);
     const {device_id} = useParams()
     const dispatch = useAppDispatch();
 
@@ -19,19 +20,18 @@ const GetDeviceDetails: FC<IProps> = () => {
 
     useEffect(() => {
         dispatch(deviceActions.getById({id:set_device_id}))
-    }, [dispatch, set_device_id])
+        dispatch(resetDev())
+    }, [dispatch, set_device_id, notes_changed, price_changed])
 
     const back = () => {
         navigate(-2)
         navigate(+1)
-
-
     }
 
     return (
         <div className={'records'}>
             <div><button onClick={back} className={'button1'}> {'<< Назад'} </button></div>
-            <div className={'record_det'}>{deviceById && <DeviceDetails DeviceDetails={deviceById}/>}</div>
+            <div className={'record_dev_det'}>{deviceById && <DeviceDetails DeviceDetails={deviceById}/>}</div>
         </div>
     )
 };

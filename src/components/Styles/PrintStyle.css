@@ -1,0 +1,48 @@
+.main_print_body{
+    position: absolute;
+    display: flex;
+    width: 1500px;
+    height: 1580px;
+    justify-content: center;
+    box-sizing: border-box;
+    font-family: "Trebuchet MS", sans-serif;
+    font-size: 20px;
+    padding: 10px;
+}
+
+.content_div{
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    width: 1330px;
+    height: 900px;
+}
+
+.print_body{
+    position: absolute;
+    z-index: 10;
+    box-sizing: border-box;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-items: flex-start;
+    font-family: "Trebuchet MS", sans-serif;
+    font-size: 20px;
+    color: grey;
+    background-color: white;
+    border-radius: 30px;
+    width: 1400px;
+    height: fit-content;
+    padding: 10px;
+}
+
+.print_details{
+    padding: 30px;
+}
+
+.print_data{
+    margin: 10px;
+    width: 980px;
+    padding: 10px;
+    border: 5px solid grey;;
+}

@@ -32,9 +32,7 @@ const RecordsPageForm = () => {
                         <button type="submit" onSubmit={search} className={'button1'} disabled={!number}>{number ? 'Знайти' : 'Введіть номер квитанції'}</button>
                     </div>
                 </form>
-
         </div>
-
     );
 };
 

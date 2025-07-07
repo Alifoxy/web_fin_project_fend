@@ -1,7 +1,6 @@
 import React, {ChangeEvent, FC, PropsWithChildren, useEffect} from "react";
 import {Manufacturer} from "./Manufacturer";
 import {useAppDispatch, useAppSelector} from "../../hooks";
-import '../Styles/RecordsStyle.css';
 import Stack from "@mui/material/Stack";
 import Pagination from "@mui/material/Pagination";
 import {useNavigate, useParams, useSearchParams} from "react-router-dom";
@@ -49,7 +48,6 @@ const Manufacturers: FC<IProps> = () => {
                 </Stack>
             </div>
         </div>
-
     )
 };
 

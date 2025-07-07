@@ -1,6 +1,7 @@
 import React from "react";
 import {Devices, DevicesSearchForm, ManufacturerSelectSearch, StatusSelectSearch} from "../../components";
 
+
 const DevicesPage = () => {
 
     return (

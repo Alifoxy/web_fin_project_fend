@@ -1,4 +1,4 @@
-import {Clients, ClientsPageForm} from "../components";
+import {Clients, ClientsPageForm} from "../../components";
 import React from "react";
 
 const ClientsPage = () => {

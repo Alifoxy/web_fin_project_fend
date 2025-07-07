@@ -4,7 +4,6 @@ import {recordsActions} from '../../store';
 import Pagination from '@mui/material/Pagination'
 import Stack from '@mui/material/Stack'
 import {useAppDispatch, useAppSelector} from "../../hooks";
-import '../Styles/RecordsStyle.css';
 import {useNavigate, useParams, useSearchParams} from "react-router-dom";
 
 interface IProps extends PropsWithChildren {
@@ -16,7 +15,6 @@ const Records: FC<IProps> = () => {
     const dispatch = useAppDispatch();
     const navigate = useNavigate();
     const {page} = useParams()
-
 
     useEffect(() => {
         dispatch(recordsActions.getAllRecords({page}))
@@ -31,7 +29,6 @@ const Records: FC<IProps> = () => {
         navigate(`${current_page}`)
     };
 
-    console.log(records)
     return (
         <div>
             <div className={'records'}>
@@ -49,8 +46,6 @@ const Records: FC<IProps> = () => {
                 </Stack>
             </div>
         </div>
-
-
     )
 };
 

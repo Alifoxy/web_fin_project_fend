@@ -22,13 +22,14 @@ import {
     StatusesPage,
     StatusesSuccessPage,
     StatusesCreatePage,
-    ManufacturersCreatePage, DevicesByManufacturerPage, DevicesByModelPage,
+    ManufacturersCreatePage, DevicesByManufacturerPage, DevicesByModelPage, NoManufacturerPage, RecordCheckPrintPage,
 } from "./pages";
 import {DevicesByStatusPage} from "./pages";
 import {NoBaseStatusPage} from "./pages";
 import {StatusExistsPage} from "./pages/errors/StatusExists";
 import {StatusParamsConflictPage} from "./pages/errors/StatusParamsConflictPage";
 import {StatusParamsExistsPage} from "./pages/errors/StatusParamsExistsPage";
+import {RecordPrintPage} from "./pages";
 
 const router = createBrowserRouter([
     {
@@ -36,12 +37,21 @@ const router = createBrowserRouter([
             {
                 index: true, element: <Navigate to={'records/1'}/>
             },
+            // {
+            //     path: 'records_create',element:<CreateRecordPage/>,children:[
+            //         {
+            //             path: 'success', element: <CreateRecordSuccessPage/>
+            //         }
+            //     ]
+            // },
             {
-                path: 'records_create',element:<CreateRecordPage/>,children:[
-                    {
-                        path: 'success', element: <CreateRecordSuccessPage/>
-                    }
-                ]
+                path: 'records_create',element:<CreateRecordPage/>,
+            },
+            {
+                path: 'records_create/success',element:<CreateRecordSuccessPage/>,
+            },
+            {
+                path: 'records_create/print',element:<RecordPrintPage/>,
             },
             {
                 path: 'records_create/client_exists',element:<ClientExistsPage/>,
@@ -120,6 +130,9 @@ const router = createBrowserRouter([
                 path: 'records/:record_id/details', element: <RecordDetailsPage/>
             },
             {
+                path: 'records/:record_id/details/print',element: <RecordCheckPrintPage/>
+            },
+            {
                 path: 'clients/:client_id/details', element: <ClientDetailsPage/>
             },
             {
@@ -137,6 +150,9 @@ const router = createBrowserRouter([
             },
             {
                 path: 'records/search/:rec_num/:record_id/details',element: <RecordDetailsPage/>
+            },
+            {
+                path: 'records/search/:rec_num/:record_id/details/print',element: <RecordPrintPage/>
             },
             {
                 path: 'clients/search',element: <SearchClientsPage/>, children:[

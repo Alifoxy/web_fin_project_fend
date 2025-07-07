@@ -36,9 +36,7 @@ const DevicesSearchForm = () => {
                         <button type="submit" onSubmit={Search} className={'button1'} disabled={!searchModel}>{searchModel ? 'Знайти' : 'Введіть назву моделі'}</button>
                     </div>
                 </form>
-
         </div>
-
     );
 };
 

@@ -1,4 +1,4 @@
-import {GetClientsByPhone} from "../components";
+import {GetClientsByPhone} from "../../components";
 import React from "react";
 
 const ClientsByPhonePage = () => {

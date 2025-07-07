@@ -1,5 +1,5 @@
 import React, {FC, PropsWithChildren, useEffect} from "react";
-import {useParams} from "react-router-dom";
+import {useNavigate, useParams} from "react-router-dom";
 import {useAppDispatch, useAppSelector} from "../../hooks";
 import {clientsActions} from "../../store";
 import {Client} from "./Client";
@@ -11,6 +11,7 @@ const GetClientsByPhone: FC<IProps> = () => {
     const {clients} = useAppSelector(state => state.clients)
     const {phone_num} = useParams()
     const dispatch = useAppDispatch()
+    const navigate = useNavigate();
 
     useEffect(() => {
         dispatch(clientsActions.getClientsByPhone({phone_num}))
@@ -25,10 +26,16 @@ const GetClientsByPhone: FC<IProps> = () => {
         }
         return cli
     }
+    const back = () => {
+        navigate(-2)
+    }
 
     return (
         <div className={'records'}>
-                {byPhone()}
+            <div>
+                <button onClick={back} className={'button1'}> {'<< Назад'} </button>
+            </div>
+            {byPhone()}
         </div>
     );
 };

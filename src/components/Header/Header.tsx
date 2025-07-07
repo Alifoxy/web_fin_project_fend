@@ -21,10 +21,10 @@ const Header = () => {
                         </div>
                         <div className={'head'}>
                             <NavLink to={'clients'}>Клієнти</NavLink>
-                        </div>
-                        <div className={'head'}>
-                            <NavLink to={'devices'}>Пристрої</NavLink>
-                        </div>
+                </div>
+                <div className={'head'}>
+                    <NavLink to={'devices'}>Пристрої</NavLink>
+                </div>
                         <div className={'head dropdown'}>
                             <div className={'dropdown_label'}>Статуси *</div>
                             <div className={'dropdown_content'}>
@@ -53,8 +53,6 @@ const Header = () => {
                     </div>
                 </div>
             </div>
-
-
     );
 };
 

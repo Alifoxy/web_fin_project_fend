@@ -1,5 +1,4 @@
-import React, {FC, PropsWithChildren, useEffect, useState} from "react";
-import '../Styles/RecordsStyle.css';
+import React, {FC, PropsWithChildren, useState} from "react";
 import {IStatus} from "../../interfaces";
 import {useAppDispatch} from "../../hooks";
 import {create_deleteStatusActions} from "../../store/slices/create_deleteStatusSlice";
@@ -7,8 +6,8 @@ import {resetStP, statusesParamsActions} from "../../store";
 
 interface IProps extends PropsWithChildren {
     SetStatus:IStatus
-
 }
+
 const Status: FC<IProps> = ({SetStatus}) => {
 
     const {id:s_id, status:st, created, manufacturer_required:m_rec, is_default, is_final, is_return_ready} = SetStatus;
@@ -17,11 +16,6 @@ const Status: FC<IProps> = ({SetStatus}) => {
     const [, setIsSFChecked] = useState(false);
     const [, setIsRRChecked] = useState(false);
     const dispatch = useAppDispatch();
-    const [refreshKey, setRefreshKey] = useState(false);
-    
-    useEffect(() => {
-
-    }, [refreshKey, dispatch]);
 
     const handleSMCheckboxChange = (event:  React.ChangeEvent<HTMLInputElement>) => {
         const checked = (event.target.checked)
@@ -31,13 +25,11 @@ const Status: FC<IProps> = ({SetStatus}) => {
             console.log(body)
             dispatch(statusesParamsActions.setManufacturerRequired({id: s_id, body }));
             dispatch(resetStP())
-
         }else{
             const body = {manufacturer_required: false}
             console.log(body)
             dispatch(statusesParamsActions.setManufacturerRequired( {id: s_id, body}));
             dispatch(resetStP())
-
         }
     }
 
@@ -49,13 +41,11 @@ const Status: FC<IProps> = ({SetStatus}) => {
             console.log(body)
             dispatch(statusesParamsActions.setDefaultStatus({id: s_id, body }));
             dispatch(resetStP())
-
         }else{
             const body = {is_default: false}
             console.log(body)
             dispatch(statusesParamsActions.setDefaultStatus( {id: s_id, body}));
             dispatch(resetStP())
-
         }
     };
 
@@ -91,14 +81,12 @@ const Status: FC<IProps> = ({SetStatus}) => {
             console.log(body)
             dispatch(statusesParamsActions.setFinalStatus( {id: s_id, body}));
             dispatch(resetStP())
-
         }
     };
 
-
     const DeleteS = async () => {
         await dispatch(create_deleteStatusActions.deleteStatus({id: s_id}))
-        setRefreshKey(prevKey => !prevKey);
+        dispatch(resetStP())
     }
 
     return (
@@ -114,7 +102,6 @@ const Status: FC<IProps> = ({SetStatus}) => {
                         onChange={handleSMCheckboxChange}
                     />
                 </div>
-
             </div>
             <div className={'table_item2'}>
                 <div>
@@ -125,7 +112,6 @@ const Status: FC<IProps> = ({SetStatus}) => {
                         onChange={handleSDCheckboxChange}
                     />
                 </div>
-
             </div>
             <div className={'table_item2'}>
                 <div>
@@ -136,7 +122,6 @@ const Status: FC<IProps> = ({SetStatus}) => {
                         onChange={handleRRCheckboxChange}
                     />
                 </div>
-
             </div>
             <div className={'table_item2'}>
                 <div>
@@ -147,7 +132,6 @@ const Status: FC<IProps> = ({SetStatus}) => {
                         onChange={handleSFCheckboxChange}
                     />
                 </div>
-
             </div>
             <button className={'delete_button'} onClick={DeleteS}>X</button>
         </div>

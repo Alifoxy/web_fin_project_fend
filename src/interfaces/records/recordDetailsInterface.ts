@@ -1,6 +1,4 @@
 import {IClientDetails} from "../clients";
-import {IStatus} from "../statuses";
-// import {IDeviceDetails} from "../devices";
 
 export interface IRecordDetails{
     id: string;
@@ -13,6 +11,7 @@ export interface IRecordDetails{
         model: string;
         equipment: string;
         break_info: string;
+        price: string;
         status: {
             id: string;
             status: string;
@@ -23,6 +22,4 @@ export interface IRecordDetails{
             is_return_ready: boolean;
         }
     }];
-
-    // devices: IDeviceDetails[];
 }

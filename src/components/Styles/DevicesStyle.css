@@ -1,0 +1,61 @@
+.device{
+    margin-top: 10px;
+}
+
+.create_div{
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-items: flex-start;
+    background-color: #709bad;
+    border-radius: 30px;
+    width: 1180px;
+    height: 280px;
+    padding: 20px;
+    margin-top: 10px;
+}
+
+.devs{
+    height: fit-content;
+}
+
+.create_inputs{
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-items: flex-start;
+    background-color: aliceblue;
+    border-radius: 30px;
+    color: #318da9;
+    width: 850px;
+    height: 150px;
+    padding: 10px 0 0 20px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.create_devices{
+    height: 230px;
+}
+
+.dev_input_div{
+    margin-top: 20px;
+}
+
+.device_returned{
+    color: darkgreen;
+    border-radius: 30px;
+    background-color: lightgreen;
+    width: 260px;
+    padding: 5px;
+    border: 3px dashed darkgreen;
+}
+
+.device_not_ready{
+    color: darkred;
+    border-radius: 30px;
+    background-color: lightcoral;
+    width: 330px;
+    padding: 5px;
+    border: 3px dashed darkred;
+}

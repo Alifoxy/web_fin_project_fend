@@ -1,6 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './components/Styles/MainStyle.css';
+import './components/Styles/PrintStyle.css';
+import './components/Styles/ButtonStyle.css';
+import './components/Styles/RecordsStyle.css';
+import './components/Styles/DevicesStyle.css';
 // import App from './App';
 import reportWebVitals from './reportWebVitals';
 import {RouterProvider} from "react-router-dom";

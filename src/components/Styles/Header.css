@@ -17,7 +17,6 @@
     width: 800px;
     display: flex;
     justify-content: space-evenly;
-
 }
 
 a{
@@ -51,7 +50,6 @@ a[class='active']{
     width : 110px;
     box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
     z-index: 1;
-
 }
 
 .dropdown_content a {
@@ -68,8 +66,6 @@ a[class='active']{
 .dropdown_option{
     display: flex;
     align-items: center;
-
-
 }
 
 .dropdown:hover .dropdown_content {display: block;}

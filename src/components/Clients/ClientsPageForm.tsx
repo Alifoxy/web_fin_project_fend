@@ -2,7 +2,6 @@ import {SubmitHandler, useForm} from "react-hook-form";
 import {useNavigate, useSearchParams} from "react-router-dom";
 import {useEffect, useState} from "react";
 
-
 const ClientsPageForm = () => {
     const {handleSubmit,reset} = useForm();
     const [,setQuery] = useSearchParams({query:''})
@@ -34,7 +33,6 @@ const ClientsPageForm = () => {
                     </div>
                 </form>
         </div>
-
     );
 };
 

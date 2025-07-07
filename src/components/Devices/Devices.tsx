@@ -2,7 +2,6 @@ import React, {ChangeEvent, FC, PropsWithChildren, useEffect} from "react";
 import {Device} from "./Device";
 import {deviceActions} from '../../store';
 import {useAppDispatch, useAppSelector} from "../../hooks";
-import '../Styles/RecordsStyle.css';
 import Stack from "@mui/material/Stack";
 import Pagination from "@mui/material/Pagination";
 import {useNavigate, useParams, useSearchParams} from "react-router-dom";
@@ -54,7 +53,6 @@ const Devices: FC<IProps> = () => {
                 </Stack>
             </div>
         </div>
-
     )
 };
 

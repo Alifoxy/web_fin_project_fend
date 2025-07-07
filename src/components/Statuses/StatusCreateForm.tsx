@@ -5,6 +5,7 @@ import {create_deleteStatusActions, resetSt} from "../../store/slices/create_del
 
 interface IProps extends PropsWithChildren {
 }
+
 const StatusCreateForm: FC<IProps> = () => {
     const {
         newStatus,
@@ -38,7 +39,6 @@ const StatusCreateForm: FC<IProps> = () => {
         console.log(body)
         // @ts-ignore
         dispatch(create_deleteStatusActions.createStatus(body));
-
     };
 
     const handleSMCheckboxChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -161,7 +161,6 @@ const StatusCreateForm: FC<IProps> = () => {
                         <h3 className={'title4'}>Фінальний статус</h3>
                     </div>
                 </div>
-
                 <div className={'button_create_div'}>
                     <button type="submit" onSubmit={handleSubmit} disabled={isStLoading || !body.status}
                             className={'button1'}>Створити

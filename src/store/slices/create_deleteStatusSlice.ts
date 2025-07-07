@@ -15,7 +15,7 @@ const initialState: IState = {
     isStError: false,
     isStSuccess: false,
     isStLoading: false,
-    message:''
+    message:'',
 }
 
 const createStatus = createAsyncThunk<INewStatus, INewStatus>(
@@ -72,6 +72,7 @@ const create_deleteStatusSlice = createSlice({
                 state.message = action.payload;
             })
             .addCase(deleteStatus.fulfilled, (state, action) => {
+                state.isStSuccess = true;
                 state.message = 'Status was deleted successfully!'
             })
 })

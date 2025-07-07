@@ -5,7 +5,6 @@ const StatusParamsConflictPage = () => {
     const navigate = useNavigate();
     const NavigateBack = () => {
         navigate(-1)
-
     };
 
     return (

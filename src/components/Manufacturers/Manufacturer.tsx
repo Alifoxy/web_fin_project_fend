@@ -1,5 +1,4 @@
 import React, {FC, PropsWithChildren, useEffect, useState} from "react";
-import '../Styles/RecordsStyle.css';
 import {IManufacturer} from "../../interfaces";
 import {useAppDispatch} from "../../hooks";
 import {create_deleteManufacturerActions} from "../../store/slices/create_deleteManufacturerSlice";

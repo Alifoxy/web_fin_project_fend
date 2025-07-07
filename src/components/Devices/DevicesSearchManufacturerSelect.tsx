@@ -22,7 +22,6 @@ const ManufacturerSelectSearch = () => {
         const newManufacturer = (event.target.value)
         setValue(newManufacturer);
 
-        // const {value} = event.target;
         console.log(newManufacturer)
         if( newManufacturer ){
             dispatch(deviceActions.getAllDevices({page}))
@@ -44,12 +43,12 @@ const ManufacturerSelectSearch = () => {
                 <h2 className={'title3'}>Знайти пристрої за виробником</h2>
             </div>
             <div>
-                <select value={value}  onChange={handleManufacturerChange}>
+                <select value={value||''} onChange={handleManufacturerChange} className={'select_input'}>
+                    <option value=''></option>
                     {manufacturer}
                 </select>
             </div>
         </div>
-
     );
 };
 

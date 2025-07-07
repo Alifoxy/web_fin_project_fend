@@ -1,0 +1,48 @@
+.success_button_div{
+    display: flex;
+    width: 1200px;
+    justify-content: space-evenly;
+}
+
+.button1{
+    font-family: "Trebuchet MS", sans-serif;
+    font-size: 15px;
+    font-weight: bolder;
+    color:#205b72 ;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: white;
+    border-radius: 30px;
+    border: 3px solid  #205b72;
+    width: 300px;
+    height: 40px;
+    padding: 10px;
+    margin-left: 10px;
+}
+
+.button2{
+    margin-top: 20px;
+}
+
+.button3{
+    border: 3px solid goldenrod;
+    color:  goldenrod;
+}
+
+.delete_button{
+    font-family: "Trebuchet MS", sans-serif;
+    font-size: 15px;
+    font-weight: bolder;
+    color:#722045 ;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #ffbef2;
+    border-radius: 30px;
+    border: 3px solid #722045;
+    width: 40px;
+    height: 40px;
+    padding: 10px;
+    margin-left: 20px;
+}

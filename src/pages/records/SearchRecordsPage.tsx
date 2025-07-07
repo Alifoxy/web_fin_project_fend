@@ -1,4 +1,3 @@
-// import {OuterDiv} from "../components/Style/MainStyledComponents";
 import React from "react";
 import {RecordsForm} from "../../components";
 import {Outlet} from "react-router-dom";
@@ -11,8 +10,6 @@ const SearchRecordsPage = () => {
                 <Outlet/>
             </div>
         </div>
-
-
     );
 };
 

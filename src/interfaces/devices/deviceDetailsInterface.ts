@@ -8,15 +8,11 @@ export interface IDeviceDetails{
     model: string;
     equipment: string;
     break_info: string;
+    result: string;
     client: IClientDetails;
     status: IStatus;
-    manufacturer_name: string;
+    manufacturer: string;
+    price: string;
     created: string;
     updated: string;
-
-    // status: {
-    //     name: string
-    //     manufacturer_required: boolean
-    //     is_default:boolean
-    // };
 }

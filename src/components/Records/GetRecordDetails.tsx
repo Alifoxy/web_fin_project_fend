@@ -2,14 +2,14 @@ import {FC, PropsWithChildren, useEffect} from "react";
 import {useNavigate, useParams} from "react-router-dom";
 import {RecordDetails} from "./RecordDetails";
 import {useAppDispatch, useAppSelector} from "../../hooks";
-import {recordsActions} from "../../store";
-import '../Styles/RecordsStyle.css';
+import {recordsActions, resetDev} from "../../store";
 
 interface IProps extends PropsWithChildren {
 }
 
 const GetRecordDetails: FC<IProps> = () => {
     const {recordById} = useAppSelector(state => state.records);
+    const {status_changed, deviceById}= useAppSelector(state => state.devices);
     const {record_id} = useParams()
     const dispatch = useAppDispatch();
 
@@ -18,7 +18,8 @@ const GetRecordDetails: FC<IProps> = () => {
 
     useEffect(() => {
         dispatch(recordsActions.getById({id:set_record_id}))
-    }, [dispatch, set_record_id])
+        dispatch(resetDev())
+    }, [dispatch, set_record_id, status_changed, deviceById])
 
     const back = () => {
         navigate(-1)
