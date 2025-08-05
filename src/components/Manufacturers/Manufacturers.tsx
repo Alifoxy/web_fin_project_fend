@@ -11,7 +11,7 @@ interface IProps extends PropsWithChildren {
 }
 
 const Manufacturers: FC<IProps> = () => {
-    const {manufacturers, total_pages, current_page} = useAppSelector(state => state.manufacturers);
+    const {manufacturers, current_page, total} = useAppSelector(state => state.manufacturers);
     const [query, setQuery]= useSearchParams({page: '1'})
     const dispatch = useAppDispatch();
     const navigate = useNavigate();
@@ -30,11 +30,14 @@ const Manufacturers: FC<IProps> = () => {
         navigate(`${current_page}`)
     };
 
+    const pages = total  / 10
+    const total_pages = Math.ceil(pages)
+
     console.log(manufacturers)
     return (
         <div>
             <div className={'records'}>
-                <div className={'table_labels'}>
+                <div className={'table_labels4'}>
                     <div className={'table_label_item'}>Виробник</div>
                     <div className={'table_label_item'}>Дата створення</div>
                 </div>

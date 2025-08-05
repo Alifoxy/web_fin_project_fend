@@ -5,14 +5,14 @@ import {IRecordDetails, IRecords} from "../../interfaces";
 interface IState {
     records: IRecordDetails[],
     recordById: IRecordDetails|null,
-    total_pages:number,
+    total:number,
     current_page:number,
 }
 
 const initialState: IState = {
     records: [],
     recordById: null,
-    total_pages: 50,
+    total: 0,
     current_page:0,
 }
 
@@ -60,9 +60,10 @@ const recordSlice = createSlice({
     extraReducers: builder =>
         builder
             .addCase(getAllRecords.fulfilled, (state, action) => {
-                const {page, data} = action.payload;
+                const {page, data, total} = action.payload;
                 state.current_page = +page
                 state.records = data;
+                state.total = total;
             })
             .addCase(getById.fulfilled, (state, action) => {
                 state.recordById = action.payload

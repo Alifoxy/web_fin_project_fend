@@ -15,12 +15,17 @@
     padding: 10px;
 }
 
+.records2{
+    display: flex;
+    height: 300px;
+}
+
 .record{
     display: flex;
     justify-content: flex-start;
     align-items: center;
     border-radius: 30px;
-    width: 1350px;
+    width: 1360px;
     padding: 5px 0 5px 0;
 }
 

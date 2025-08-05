@@ -1,5 +1,5 @@
 import {createBrowserRouter, Navigate} from "react-router-dom";
-import {MainLayout} from "./layouts";
+import {MainLayout, PrintLayout} from "./layouts";
 import {
     RecordsPage,
     ClientsPage,
@@ -18,17 +18,12 @@ import {
     CreateNewSuccessPage,
     JoinOldSuccessPage,
     ManufacturersPage,
-    ManufacturersSuccessPage,
     StatusesPage,
-    StatusesSuccessPage,
     StatusesCreatePage,
-    ManufacturersCreatePage, DevicesByManufacturerPage, DevicesByModelPage, NoManufacturerPage, RecordCheckPrintPage,
+    ManufacturersCreatePage, DevicesByManufacturerPage, DevicesByModelPage, RecordCheckPrintPage,
 } from "./pages";
 import {DevicesByStatusPage} from "./pages";
 import {NoBaseStatusPage} from "./pages";
-import {StatusExistsPage} from "./pages/errors/StatusExists";
-import {StatusParamsConflictPage} from "./pages/errors/StatusParamsConflictPage";
-import {StatusParamsExistsPage} from "./pages/errors/StatusParamsExistsPage";
 import {RecordPrintPage} from "./pages";
 
 const router = createBrowserRouter([
@@ -37,21 +32,11 @@ const router = createBrowserRouter([
             {
                 index: true, element: <Navigate to={'records/1'}/>
             },
-            // {
-            //     path: 'records_create',element:<CreateRecordPage/>,children:[
-            //         {
-            //             path: 'success', element: <CreateRecordSuccessPage/>
-            //         }
-            //     ]
-            // },
             {
                 path: 'records_create',element:<CreateRecordPage/>,
             },
             {
                 path: 'records_create/success',element:<CreateRecordSuccessPage/>,
-            },
-            {
-                path: 'records_create/print',element:<RecordPrintPage/>,
             },
             {
                 path: 'records_create/client_exists',element:<ClientExistsPage/>,
@@ -95,21 +80,7 @@ const router = createBrowserRouter([
                 ]
             },
             {
-                path: 'statuses_create',element:<StatusesCreatePage/>,children:[
-                    {
-                        path: 'success',element: <StatusesSuccessPage/>
-                    },
-                    {
-                        path: 'error_exists',element: <StatusExistsPage/>
-                    },
-                    {
-                        path: 'error_params_conflict',element: <StatusParamsConflictPage/>
-                    },
-                    {
-                        path: 'error_params_exist',element: <StatusParamsExistsPage/>
-                    },
-
-                ]
+                path: 'statuses_create',element:<StatusesCreatePage/>
             },
             {
                 path: 'manufacturers',element:<ManufacturersPage/>,children:[
@@ -119,18 +90,10 @@ const router = createBrowserRouter([
                 ]
             },
             {
-                path: 'manufacturers_create',element:<ManufacturersCreatePage/>,children:[
-                    {
-                        path: 'success',element: <ManufacturersSuccessPage/>
-                    },
-
-                ]
+                path: 'manufacturers_create',element:<ManufacturersCreatePage/>
             },
             {
                 path: 'records/:record_id/details', element: <RecordDetailsPage/>
-            },
-            {
-                path: 'records/:record_id/details/print',element: <RecordCheckPrintPage/>
             },
             {
                 path: 'clients/:client_id/details', element: <ClientDetailsPage/>
@@ -151,9 +114,7 @@ const router = createBrowserRouter([
             {
                 path: 'records/search/:rec_num/:record_id/details',element: <RecordDetailsPage/>
             },
-            {
-                path: 'records/search/:rec_num/:record_id/details/print',element: <RecordPrintPage/>
-            },
+
             {
                 path: 'clients/search',element: <SearchClientsPage/>, children:[
                     {
@@ -164,7 +125,7 @@ const router = createBrowserRouter([
             {
                 path: 'devices/search/status/:status',element: <DevicesByStatusPage/>, children:[
                     {
-                        path: ':page', element: <DevicesByStatusPage/>
+                        path: ':search_page', element: <DevicesByStatusPage/>
                     },
                 ]
             },
@@ -189,6 +150,13 @@ const router = createBrowserRouter([
                 ]
             },
             {
+                path: 'devices/search/model/:search',element: <DevicesByModelPage/>, children:[
+                    {
+                        path: ':page', element: <DevicesByModelPage/>
+                    },
+                ]
+            },
+            {
                 path: 'devices/search/model/:search/:device_id/details',element: <DeviceDetailsPage/>
             },
             {
@@ -197,8 +165,21 @@ const router = createBrowserRouter([
             {
                 path: 'clients/search/:phone_num/:client_id/details/record/:record_id',element: <RecordDetailsPage/>
             },
+        ],
+    },
+    {
+        path: '',element: <PrintLayout/>, children:[
+            {
+                path: 'records_create/print',element:<RecordPrintPage/>,
+            },
+            {
+                path: 'records/search/:rec_num/:record_id/details/print',element: <RecordCheckPrintPage/>
+            },
+            {
+                path: 'records/:record_id/details/print',element: <RecordCheckPrintPage/>
+            },
         ]
-    }
+    },
 ]);
 
 export {

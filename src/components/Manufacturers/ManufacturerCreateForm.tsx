@@ -2,6 +2,7 @@ import React, {FC, PropsWithChildren, useEffect, useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {useNavigate} from "react-router-dom";
 import {create_deleteManufacturerActions, resetM} from "../../store/slices/create_deleteManufacturerSlice";
+import {ErrorWindow, SuccessWindow} from "../Dialogs";
 
 interface IProps extends PropsWithChildren {
 }
@@ -11,6 +12,13 @@ const ManufacturerCreateForm: FC<IProps> = () => {
     const [body, setBody]= useState({manufacturer:''})
     const dispatch = useDispatch();
     const navigate = useNavigate();
+    const [error, setError] = useState<string | null>(null);
+    const [success, setSuccess] = useState<string | null>(null);
+
+    const clearMessage = () => {
+        setError(null);
+        setSuccess(null);
+    };
 
     const handleManufacturerChange =  (event: React.ChangeEvent<HTMLInputElement>) => {
         const {value} = event.target;
@@ -24,20 +32,15 @@ const ManufacturerCreateForm: FC<IProps> = () => {
         // @ts-ignore
         dispatch(create_deleteManufacturerActions.createManufacturer(body));
 
-
     };
 
     useEffect(() => {
         setBody({manufacturer: body.manufacturer})
-        const redirectToSuccess = () => {
-            navigate('success')
-        }
-        if (isMaError) {
-            alert(`Error: ${message}`);
+        if (isMaError && message) {
+            setError('Такий виробник вже існує!')
         }
         if (isMaSuccess && newManufacturer) {
-            alert(`${message}`);
-            redirectToSuccess()
+            setSuccess('Виробник був успішно створений!')
         }
 
         return () => {
@@ -46,9 +49,11 @@ const ManufacturerCreateForm: FC<IProps> = () => {
     }, [newManufacturer, message, dispatch, body.manufacturer, navigate, isMaError, isMaSuccess]);
 
     return (
-        <div className={'records'}>
+        <div className={'records records2'}>
+            <ErrorWindow message={error} onClose={clearMessage} />
+            <SuccessWindow message ={success} onClose={clearMessage}/>
             <form onSubmit={handleSubmit}>
-                <div className={'create_div'}>
+                <div className={'create_div create2'}>
                     <div className={'title2'}>Створити нового виробника</div>
                     <input type="text" placeholder={"виробник"} name="name" value={body.manufacturer}
                            onChange={handleManufacturerChange} className={'input'} required={true}/>

@@ -22,7 +22,7 @@ const DevicesSearchForm = () => {
     const Search: SubmitHandler<any> = () => {
         console.log(searchModel)
         reset()
-        navigate(`search/model/${searchModel}/${current_page}`)
+        navigate(`search/model/${searchModel}/1`)
     };
 
     return (

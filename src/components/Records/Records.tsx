@@ -10,7 +10,7 @@ interface IProps extends PropsWithChildren {
 }
 
 const Records: FC<IProps> = () => {
-    const {records, total_pages, current_page} = useAppSelector(state => state.records);
+    const {records, total, current_page} = useAppSelector(state => state.records);
     const [query, setQuery]= useSearchParams({page: '1'})
     const dispatch = useAppDispatch();
     const navigate = useNavigate();
@@ -28,6 +28,22 @@ const Records: FC<IProps> = () => {
         })
         navigate(`${current_page}`)
     };
+     const sortable_records = [...records]
+
+    sortable_records.sort((a, b)=> {
+        const date_a = new Date(a.created);
+        const date_b = new Date(b.created);
+        return date_b.getTime() - date_a.getTime()
+    })
+
+    const pages = total  / 10
+    const total_pages = Math.ceil(pages)
+
+
+
+
+    console.log(total)
+    console.log(records.length)
 
     return (
         <div>
@@ -37,7 +53,7 @@ const Records: FC<IProps> = () => {
                     <div className={'table_label_item'}>Дата створення</div>
                     <div className={'table_label_item'}>Статус</div>
                 </div>
-                {records.map((record => <Record key={record.id} SetRecord={record}/>))}
+                {sortable_records.map((record => <Record key={record.id} SetRecord={record}/>))}
             </div>
             <div className={'pagination_div'}>
                 <Stack spacing={2} className={'pagination'}>

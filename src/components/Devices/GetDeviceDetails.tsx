@@ -21,11 +21,11 @@ const GetDeviceDetails: FC<IProps> = () => {
     useEffect(() => {
         dispatch(deviceActions.getById({id:set_device_id}))
         dispatch(resetDev())
-    }, [dispatch, set_device_id, notes_changed, price_changed])
+    }, [dispatch, set_device_id])
 
     const back = () => {
-        navigate(-2)
-        navigate(+1)
+        navigate(-1)
+        // navigate(+1)
     }
 
     return (

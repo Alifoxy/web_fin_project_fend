@@ -30,6 +30,16 @@
     color:  goldenrod;
 }
 
+.dialog_button{
+    width: 200px;
+}
+
+.dialog_bt_div{
+    display: flex;
+    width: 500px;
+    justify-content: space-evenly;
+}
+
 .delete_button{
     font-family: "Trebuchet MS", sans-serif;
     font-size: 15px;
@@ -45,4 +55,19 @@
     height: 40px;
     padding: 10px;
     margin-left: 5px;
+}
+
+button:disabled {
+    /*font-family: "Trebuchet MS", sans-serif;*/
+    /*font-size: 15px;*/
+    /*font-weight: bolder;*/
+    color: slategray ;
+    /*display: flex;*/
+    /*justify-content: center;*/
+    /*align-items: center;*/
+    background-color: lightgray;
+    /*border-radius: 30px;*/
+    border: 3px solid slategray;
+    /*padding: 10px;*/
+    /*margin-left: 5px;*/
 }

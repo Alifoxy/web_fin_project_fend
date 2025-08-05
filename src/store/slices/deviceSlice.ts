@@ -6,7 +6,7 @@ import {IChangePrice} from "../../interfaces/devices/changeDevicePriceInterface"
 interface IState {
     devices: IDeviceDetails[],
     deviceById: IDeviceDetails|null,
-    total_pages:number,
+    total:number,
     current_page:number,
     status_changed: boolean
     notes_changed: boolean
@@ -16,7 +16,7 @@ interface IState {
 const initialState: IState = {
     devices:[],
     deviceById:null,
-    total_pages: 50,
+    total: 0,
     current_page:0,
     status_changed: false,
     notes_changed: false,
@@ -35,11 +35,11 @@ const getAllDevices = createAsyncThunk<IDevices, {page:string|undefined}>(
     }
 )
 
-const getByModel = createAsyncThunk<IDevices, {search:string|undefined}>(
+const getByModel = createAsyncThunk<IDevices, {page:string|undefined, search:string|undefined}>(
     'deviceSlice/getByModel',
-    async ({search},thunkAPI) => {
+    async ({page,search},thunkAPI) => {
         try {
-            const {data} = await deviceService.getByModel(search);
+            const {data} = await deviceService.getByModel(page, search);
             return data
         } catch (error:any) {
             return thunkAPI.rejectWithValue(error.response.data)
@@ -47,11 +47,11 @@ const getByModel = createAsyncThunk<IDevices, {search:string|undefined}>(
     }
 )
 
-const getByStatus = createAsyncThunk<IDevices, {status:string|undefined}>(
+const getByStatus = createAsyncThunk<IDevices, {page:string|undefined, status:string|undefined}>(
     'deviceSlice/getByStatus',
-    async ({status},thunkAPI) => {
+    async ({page,status},thunkAPI) => {
         try {
-            const {data} = await deviceService.getByStatus(status);
+            const {data} = await deviceService.getByStatus(page,status);
             return data
         } catch (error:any) {
             return thunkAPI.rejectWithValue(error.response.data)
@@ -59,11 +59,11 @@ const getByStatus = createAsyncThunk<IDevices, {status:string|undefined}>(
     }
 )
 
-const getByManufacturer = createAsyncThunk<IDevices, {manufacturer:string|undefined}>(
+const getByManufacturer = createAsyncThunk<IDevices, {page:string|undefined, manufacturer:string|undefined}>(
     'deviceSlice/getByManufacturer',
-    async ({manufacturer},thunkAPI) => {
+    async ({page,manufacturer},thunkAPI) => {
         try {
-            const {data} = await deviceService.getByManufacturer(manufacturer);
+            const {data} = await deviceService.getByManufacturer(page, manufacturer);
             return data
         } catch (error:any) {
             return thunkAPI.rejectWithValue(error.response.data)
@@ -135,24 +135,30 @@ const deviceSlice = createSlice({
     extraReducers: builder =>
         builder
             .addCase(getAllDevices.fulfilled, (state, action) => {
-                const {page, data} = action.payload;
+                const {page, data, total} = action.payload;
                 state.current_page = +page;
                 state.devices = data;
+                state.total= total;
+
             })
             .addCase(getByModel.fulfilled, (state, action) => {
-                const {page, data} = action.payload;
+                const {page, data, total} = action.payload;
                 state.current_page = +page;
                 state.devices = data;
+                state.total = total
             })
             .addCase(getByStatus.fulfilled, (state, action) => {
-                const {page, data} = action.payload;
+                const {page, data, total} = action.payload;
                 state.current_page = +page;
                 state.devices = data;
+                state.total = total;
             })
             .addCase(getByManufacturer.fulfilled, (state, action) => {
-                const {page, data} = action.payload;
+                const {page, data, total} = action.payload;
                 state.current_page = +page;
                 state.devices = data;
+                state.total = total;
+
             })
             .addCase(getById.fulfilled, (state, action) => {
                 state.deviceById = action.payload

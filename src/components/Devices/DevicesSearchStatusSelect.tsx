@@ -20,7 +20,7 @@ const StatusSelectSearch = () => {
         console.log(newStatus)
 
         if (newStatus) {
-            navigate(`search/status/${newStatus}/${current_page}`)
+            navigate(`search/status/${newStatus}/1`)
         } else {
             console.log('something went wrong!')
         }

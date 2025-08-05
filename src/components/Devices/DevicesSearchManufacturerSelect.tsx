@@ -9,6 +9,7 @@ const ManufacturerSelectSearch = () => {
     const {manufacturers} = useAppSelector(state => state.manufacturers);
     const {current_page} = useAppSelector(state => state.devices)
     const {page} = useParams()
+    const {search_page} = useParams()
     const [value, setValue] = useState('')
     const navigate = useNavigate();
     const dispatch = useAppDispatch();
@@ -26,7 +27,7 @@ const ManufacturerSelectSearch = () => {
         if( newManufacturer ){
             dispatch(deviceActions.getAllDevices({page}))
 
-            navigate(`search/manufacturer/${newManufacturer}/${current_page}`)
+            navigate(`search/manufacturer/${newManufacturer}/1`)
         }else{
             console.log('something went wrong!')
 

@@ -9,7 +9,7 @@ interface IState {
     isLoading: boolean,
     temp:boolean,
     clientById: IClientDetails|null,
-    total_pages:number,
+    total:number,
     current_page:number,
 }
 
@@ -20,7 +20,7 @@ const initialState: IState = {
     isLoading: false,
     temp:true,
     clientById:null,
-    total_pages: 50,
+    total: 0,
     current_page:0,
 };
 
@@ -86,9 +86,10 @@ const clientSlice = createSlice({
     extraReducers: builder =>
         builder
             .addCase(getAllClients.fulfilled, (state, action) => {
-                const {page, data} = action.payload;
+                const {page, data, total} = action.payload;
                 state.current_page = +page
                 state.clients = data;
+                state.total = total;
             })
             .addCase(getById.fulfilled, (state, action) => {
                 state.clientById = action.payload

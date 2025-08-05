@@ -7,7 +7,7 @@ interface IState {
     status: IStatus|null
     statuses: IStatus[],
     statusByName: IStatuses|null,
-    total_pages:number,
+    total:number,
     current_page:number,
 }
 
@@ -15,7 +15,7 @@ const initialState: IState = {
     status:null,
     statuses: [],
     statusByName: null,
-    total_pages: 10,
+    total: 0,
     current_page:0,
 }
 
@@ -63,13 +63,15 @@ const statusSlice = createSlice({
     extraReducers: builder =>
         builder
             .addCase(getStatusesByPage.fulfilled, (state, action) => {
-                const {page, data} = action.payload;
+                const {page, data, total} = action.payload;
                 state.current_page = +page
                 state.statuses = data;
+                state.total = total;
             })
             .addCase(getAllStatuses.fulfilled, (state, action) => {
-                const {data} = action.payload;
+                const {data, total} = action.payload;
                 state.statuses = data;
+                state.total = total;
             })
             .addCase(getByName.fulfilled, (state, action) => {
                 state.statusByName = action.payload

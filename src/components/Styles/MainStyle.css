@@ -1,8 +1,10 @@
 .outer_div{
     display: flex;
+    /*justify-content: center;*/
+    /*align-items: center;*/
     justify-content: flex-start;
     align-items: flex-start;
-    height: 100%;
+    height: auto;
     margin:0;
 }
 
@@ -25,6 +27,11 @@ body{
 .er_title{
     font-family: "Trebuchet MS", sans-serif;
     color: darkred;
+}
+
+.sc_title{
+    font-family: "Trebuchet MS", sans-serif;
+    color: darkgreen;
 }
 
 .pagination_div{
@@ -65,7 +72,7 @@ body{
 }
 
 .select_input{
-    width: 300px;
+    width: 220px;
     height: 40px;
     font-family: "Trebuchet MS", sans-serif;
     font-size: 20px;
@@ -75,8 +82,10 @@ body{
 }
 
 .price_input{
+    resize: none;
     width: 300px;
-    height: 20px;
+    padding: 2px;
+    height: 30px;
 }
 
 .table_item{
@@ -97,8 +106,13 @@ body{
     justify-content: center;
     align-items: center;
     width: 200px;
-    margin-left:12px ;
+    margin-left: 15px;
 
+}
+
+.table_item3{
+    display: flex;
+    width: 220px;
 }
 
 .table_labels{
@@ -106,16 +120,39 @@ body{
     justify-content: space-around;
     align-items: center;
     margin: 10px;
-    width: 970px;
+    width: 975px;
     font-family: "Trebuchet MS", sans-serif;
     font-size: 20px;
     padding-left: 5px;
     color: white;
 }
 
-.table_labels2{
+.status_labels{
+    margin-left: 15px;
     display: flex;
     width: 1300px;
+}
+
+.table_labels2{
+    display: flex;
+    width: 565px;
+}
+
+.table_labels3{
+    display: flex;
+    width: 1050px;
+}
+
+.table_labels4{
+    margin-left: 15px;
+    display: flex;
+    width: 650px;
+}
+
+.table_labels5{
+    margin-right: 15px;
+    display: flex;
+    width: 750px;
 }
 
 .table_label_item{
@@ -131,8 +168,20 @@ body{
 }
 
 .table_label_item2{
-    width: 300px;
+    display: flex;
+    width: 480px;
     font-size: 15px;
+    margin-right: 10px;
+}
+
+.table_label_item3{
+    width: 220px;
+    font-size: 20px;
+}
+
+.table_label_item4{
+    width: 290px;
+    font-size: 20px;
 }
 
 .title1 {
@@ -160,8 +209,45 @@ body{
     color: white;
 }
 
+.title_white{
+    color: white;
+}
+
 .success_title{
     font-family: "Trebuchet MS", sans-serif;
     font-size: 30px;
     color: gold;
+}
+
+.dialog-backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.dialog-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    max-width: 500px;
+    border: 3px solid darkred;
+    color: #722045;
+    text-align: center;
+    position: relative;
+}
+
+.success-dialog{
+    border: 3px solid green;
+    color: darkgreen;
 }

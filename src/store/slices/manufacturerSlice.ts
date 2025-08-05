@@ -5,14 +5,14 @@ import {manufacturerService} from "../../services";
 interface IState {
     manufacturers: IManufacturer[],
     manufacturerByName: IManufacturers|null,
-    total_pages:number,
+    total:number,
     current_page:number,
 }
 
 const initialState: IState = {
     manufacturers: [],
     manufacturerByName: null,
-    total_pages: 10,
+    total: 0,
     current_page:0,
 }
 
@@ -59,13 +59,15 @@ const manufacturerSlice = createSlice({
     extraReducers: builder =>
         builder
             .addCase(getAllManufacturers.fulfilled, (state, action) => {
-                const {data} = action.payload;
+                const {data, total} = action.payload;
                 state.manufacturers = data;
+                state.total = total;
             })
             .addCase(getManufacturersByPage.fulfilled, (state, action) => {
-                const {page, data} = action.payload;
+                const {page, data, total} = action.payload;
                 state.current_page = +page
                 state.manufacturers = data;
+                state.total = total;
             })
             .addCase(getByName.fulfilled, (state, action) => {
                 state.manufacturerByName = action.payload

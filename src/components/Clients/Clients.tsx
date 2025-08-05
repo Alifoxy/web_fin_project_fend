@@ -10,7 +10,7 @@ interface IProps extends PropsWithChildren {
 }
 
 const Clients: FC<IProps> = () => {
-    const {clients, total_pages, current_page} = useAppSelector(state => state.clients);
+    const {clients, current_page, total} = useAppSelector(state => state.clients);
     const [query, setQuery]= useSearchParams({page: '1'})
     const dispatch = useAppDispatch();
     const navigate = useNavigate();
@@ -28,6 +28,9 @@ const Clients: FC<IProps> = () => {
         })
         navigate(`${current_page}`)
     };
+
+    const pages = total  / 10
+    const total_pages = Math.ceil(pages)
 
     return (
         <div>
